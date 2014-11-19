@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6198" systemVersion="14A297b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6198"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="6250"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -641,12 +642,12 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MapPointMapper" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller - Window-->
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
@@ -657,25 +658,104 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <segue destination="x5f-ay-aNI" kind="relationship" relationship="window.shadowedContentViewController" id="ODh-1E-pql"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
+        <!--Map Points Mapper-->
+        <scene sceneID="SR0-ER-2RM">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <viewController title="Map Points Mapper" id="x5f-ay-aNI" customClass="ViewController" customModule="MapPointMapper" sceneMemberID="viewController">
+                    <view key="view" id="B7T-Ob-fzQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zfK-eb-zSN">
+                                <rect key="frame" x="27" y="432" width="97" height="32"/>
+                                <buttonCell key="cell" type="push" title="Load File" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wty-2s-r1s">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="loadFileButtonPressed:" target="x5f-ay-aNI" id="Fyj-wA-DMV"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mIA-fl-4xO">
+                                <rect key="frame" x="426" y="-1" width="160" height="32"/>
+                                <buttonCell key="cell" type="push" title="Add Line From Text" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nIS-0A-n26">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addLineFromTextPressed:" target="x5f-ay-aNI" id="s7R-Z9-LHc"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZzA-3K-qLW">
+                                <rect key="frame" x="160" y="7" width="264" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Ksf-cz-pNz">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <mapView mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IDf-sq-Yq7">
+                                <rect key="frame" x="160" y="33" width="440" height="447"/>
+                            </mapView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N5u-4y-0Q9">
+                                <rect key="frame" x="2" y="366" width="147" height="32"/>
+                                <buttonCell key="cell" type="push" title="Remove All Lines" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ReJ-rw-vMY">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeAllLinesPressed:" target="x5f-ay-aNI" id="uSX-am-hZX"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LSh-zC-JDv">
+                                <rect key="frame" x="0.0" y="399" width="151" height="32"/>
+                                <buttonCell key="cell" type="push" title="Remove Last Line" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eoe-LW-K4o">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeLastLinePressed:" target="x5f-ay-aNI" id="HSe-1E-LyS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="LSh-zC-JDv" firstAttribute="centerX" secondItem="N5u-4y-0Q9" secondAttribute="centerX" id="1ut-jI-Uch"/>
+                            <constraint firstItem="zfK-eb-zSN" firstAttribute="leading" secondItem="B7T-Ob-fzQ" secondAttribute="leading" constant="33" id="AKa-FB-iWj"/>
+                            <constraint firstItem="zfK-eb-zSN" firstAttribute="top" secondItem="B7T-Ob-fzQ" secondAttribute="top" constant="20" id="EEv-3B-p4I"/>
+                            <constraint firstItem="ZzA-3K-qLW" firstAttribute="top" secondItem="IDf-sq-Yq7" secondAttribute="bottom" constant="4" id="Hfy-7U-DgB"/>
+                            <constraint firstItem="N5u-4y-0Q9" firstAttribute="top" secondItem="LSh-zC-JDv" secondAttribute="bottom" constant="12" id="Mnq-f3-uuq"/>
+                            <constraint firstItem="mIA-fl-4xO" firstAttribute="leading" secondItem="ZzA-3K-qLW" secondAttribute="trailing" constant="8" id="PSs-5s-XbC"/>
+                            <constraint firstAttribute="bottom" secondItem="ZzA-3K-qLW" secondAttribute="bottom" constant="7" id="QsB-B6-lJv"/>
+                            <constraint firstItem="IDf-sq-Yq7" firstAttribute="top" secondItem="B7T-Ob-fzQ" secondAttribute="top" id="T1c-t8-j8i"/>
+                            <constraint firstAttribute="trailing" secondItem="mIA-fl-4xO" secondAttribute="trailing" constant="20" id="atY-mY-yty"/>
+                            <constraint firstItem="IDf-sq-Yq7" firstAttribute="leading" secondItem="LSh-zC-JDv" secondAttribute="trailing" constant="15" id="feN-0l-sxi"/>
+                            <constraint firstItem="ZzA-3K-qLW" firstAttribute="leading" secondItem="IDf-sq-Yq7" secondAttribute="leading" id="gej-VO-hb0"/>
+                            <constraint firstItem="mIA-fl-4xO" firstAttribute="top" secondItem="IDf-sq-Yq7" secondAttribute="bottom" constant="6" id="hmv-IB-z4l"/>
+                            <constraint firstAttribute="bottom" secondItem="mIA-fl-4xO" secondAttribute="bottom" constant="6" id="kyp-Vi-3Dw"/>
+                            <constraint firstItem="LSh-zC-JDv" firstAttribute="top" secondItem="zfK-eb-zSN" secondAttribute="bottom" constant="12" id="qv1-Rh-uQ4"/>
+                            <constraint firstAttribute="trailing" secondItem="IDf-sq-Yq7" secondAttribute="trailing" id="rsb-I2-xv9"/>
+                            <constraint firstItem="zfK-eb-zSN" firstAttribute="centerX" secondItem="LSh-zC-JDv" secondAttribute="centerX" id="wfE-f4-YtA"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addLineFromTextButton" destination="mIA-fl-4xO" id="8P0-uJ-XUm"/>
+                        <outlet property="loadFileButton" destination="zfK-eb-zSN" id="dKo-Yb-Lvr"/>
+                        <outlet property="mapview" destination="IDf-sq-Yq7" id="YPq-jQ-DYM"/>
+                        <outlet property="removeAllLinesButton" destination="N5u-4y-0Q9" id="EDX-b6-NPh"/>
+                        <outlet property="removeLastLineButton" destination="LSh-zC-JDv" id="8Cs-UX-5mQ"/>
+                        <outlet property="textfield" destination="ZzA-3K-qLW" id="4P3-HM-weB"/>
+                    </connections>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="fGR-fx-kHM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="824"/>
         </scene>
     </scenes>
 </document>
