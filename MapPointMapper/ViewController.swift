@@ -86,6 +86,8 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         
         mapview.addOverlay(polyline, level: .AboveRoads)
         mapview.setVisibleMapRect(polyline.boundingMapRect, animated: true)
+        
+        free(coordinates)
     }
     
     private func readFileAtURL(passedURL: NSURL?) {
