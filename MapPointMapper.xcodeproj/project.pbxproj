@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		547424EA1A1C1CE800A8478C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547424E91A1C1CE800A8478C /* AppDelegate.swift */; };
+		547424EC1A1C1CE800A8478C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547424EB1A1C1CE800A8478C /* ViewController.swift */; };
+		547424EE1A1C1CE800A8478C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 547424ED1A1C1CE800A8478C /* Images.xcassets */; };
+		547424F11A1C1CE800A8478C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 547424EF1A1C1CE800A8478C /* Main.storyboard */; };
+		547424FD1A1C1CE800A8478C /* MapPointMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547424FC1A1C1CE800A8478C /* MapPointMapperTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		547424F71A1C1CE800A8478C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 547424DC1A1C1CE800A8478C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 547424E31A1C1CE800A8478C;
+			remoteInfo = MapPointMapper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		547424E41A1C1CE800A8478C /* MapPointMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapPointMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		547424E81A1C1CE800A8478C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		547424E91A1C1CE800A8478C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		547424EB1A1C1CE800A8478C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		547424ED1A1C1CE800A8478C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		547424F01A1C1CE800A8478C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		547424F61A1C1CE800A8478C /* MapPointMapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapPointMapperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		547424FB1A1C1CE800A8478C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		547424FC1A1C1CE800A8478C /* MapPointMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointMapperTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		547424E11A1C1CE800A8478C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		547424F31A1C1CE800A8478C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		547424DB1A1C1CE800A8478C = {
+			isa = PBXGroup;
+			children = (
+				547424E61A1C1CE800A8478C /* MapPointMapper */,
+				547424F91A1C1CE800A8478C /* MapPointMapperTests */,
+				547424E51A1C1CE800A8478C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		547424E51A1C1CE800A8478C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				547424E41A1C1CE800A8478C /* MapPointMapper.app */,
+				547424F61A1C1CE800A8478C /* MapPointMapperTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		547424E61A1C1CE800A8478C /* MapPointMapper */ = {
+			isa = PBXGroup;
+			children = (
+				547424E91A1C1CE800A8478C /* AppDelegate.swift */,
+				547424EB1A1C1CE800A8478C /* ViewController.swift */,
+				547424ED1A1C1CE800A8478C /* Images.xcassets */,
+				547424EF1A1C1CE800A8478C /* Main.storyboard */,
+				547424E71A1C1CE800A8478C /* Supporting Files */,
+			);
+			path = MapPointMapper;
+			sourceTree = "<group>";
+		};
+		547424E71A1C1CE800A8478C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				547424E81A1C1CE800A8478C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		547424F91A1C1CE800A8478C /* MapPointMapperTests */ = {
+			isa = PBXGroup;
+			children = (
+				547424FC1A1C1CE800A8478C /* MapPointMapperTests.swift */,
+				547424FA1A1C1CE800A8478C /* Supporting Files */,
+			);
+			path = MapPointMapperTests;
+			sourceTree = "<group>";
+		};
+		547424FA1A1C1CE800A8478C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				547424FB1A1C1CE800A8478C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		547424E31A1C1CE800A8478C /* MapPointMapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 547425001A1C1CE800A8478C /* Build configuration list for PBXNativeTarget "MapPointMapper" */;
+			buildPhases = (
+				547424E01A1C1CE800A8478C /* Sources */,
+				547424E11A1C1CE800A8478C /* Frameworks */,
+				547424E21A1C1CE800A8478C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MapPointMapper;
+			productName = MapPointMapper;
+			productReference = 547424E41A1C1CE800A8478C /* MapPointMapper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		547424F51A1C1CE800A8478C /* MapPointMapperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 547425031A1C1CE800A8478C /* Build configuration list for PBXNativeTarget "MapPointMapperTests" */;
+			buildPhases = (
+				547424F21A1C1CE800A8478C /* Sources */,
+				547424F31A1C1CE800A8478C /* Frameworks */,
+				547424F41A1C1CE800A8478C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				547424F81A1C1CE800A8478C /* PBXTargetDependency */,
+			);
+			name = MapPointMapperTests;
+			productName = MapPointMapperTests;
+			productReference = 547424F61A1C1CE800A8478C /* MapPointMapperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		547424DC1A1C1CE800A8478C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = dmiedema;
+				TargetAttributes = {
+					547424E31A1C1CE800A8478C = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					547424F51A1C1CE800A8478C = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 547424E31A1C1CE800A8478C;
+					};
+				};
+			};
+			buildConfigurationList = 547424DF1A1C1CE800A8478C /* Build configuration list for PBXProject "MapPointMapper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 547424DB1A1C1CE800A8478C;
+			productRefGroup = 547424E51A1C1CE800A8478C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				547424E31A1C1CE800A8478C /* MapPointMapper */,
+				547424F51A1C1CE800A8478C /* MapPointMapperTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		547424E21A1C1CE800A8478C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				547424EE1A1C1CE800A8478C /* Images.xcassets in Resources */,
+				547424F11A1C1CE800A8478C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		547424F41A1C1CE800A8478C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		547424E01A1C1CE800A8478C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				547424EC1A1C1CE800A8478C /* ViewController.swift in Sources */,
+				547424EA1A1C1CE800A8478C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		547424F21A1C1CE800A8478C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				547424FD1A1C1CE800A8478C /* MapPointMapperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		547424F81A1C1CE800A8478C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 547424E31A1C1CE800A8478C /* MapPointMapper */;
+			targetProxy = 547424F71A1C1CE800A8478C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		547424EF1A1C1CE800A8478C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				547424F01A1C1CE800A8478C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		547424FE1A1C1CE800A8478C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		547424FF1A1C1CE800A8478C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		547425011A1C1CE800A8478C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MapPointMapper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		547425021A1C1CE800A8478C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MapPointMapper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		547425041A1C1CE800A8478C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MapPointMapperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MapPointMapper.app/Contents/MacOS/MapPointMapper";
+			};
+			name = Debug;
+		};
+		547425051A1C1CE800A8478C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MapPointMapperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MapPointMapper.app/Contents/MacOS/MapPointMapper";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		547424DF1A1C1CE800A8478C /* Build configuration list for PBXProject "MapPointMapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				547424FE1A1C1CE800A8478C /* Debug */,
+				547424FF1A1C1CE800A8478C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		547425001A1C1CE800A8478C /* Build configuration list for PBXNativeTarget "MapPointMapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				547425011A1C1CE800A8478C /* Debug */,
+				547425021A1C1CE800A8478C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		547425031A1C1CE800A8478C /* Build configuration list for PBXNativeTarget "MapPointMapperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				547425041A1C1CE800A8478C /* Debug */,
+				547425051A1C1CE800A8478C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 547424DC1A1C1CE800A8478C /* Project object */;
+}
