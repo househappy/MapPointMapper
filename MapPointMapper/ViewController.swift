@@ -102,16 +102,12 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
                 return
             }
             
-            parseFileString(contents!)
+            parseInput(contents!)
         }
     } // end readFileAtURL
     
-    private func parseFileString(fileString: String) {
-        parseInput(fileString.stringByReplacingOccurrencesOfString("\n", withString: ",", options: .CaseInsensitiveSearch, range: nil))
-    }
-    
     private func parseInput(input: String) {
-        let stripped = input.stringByReplacingOccurrencesOfString(" ", withString: "", options: .CaseInsensitiveSearch, range: nil)
+        let stripped = input.stringByReplacingOccurrencesOfString(" ", withString: "", options: .CaseInsensitiveSearch, range: nil).stringByReplacingOccurrencesOfString("\n", withString: ",", options: .CaseInsensitiveSearch, range: nil)
         
         let components = stripped.componentsSeparatedByString(",")
         
