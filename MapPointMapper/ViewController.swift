@@ -20,15 +20,6 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     @IBOutlet weak var mapview: MKMapView!
     @IBOutlet weak var textfield: NSTextField!
     
-//    private var mapPoints: [CLLocationCoordinate2D] {
-//        set(newValue) {
-//            self.mapPoints = newValue
-//            self.drawPointsOnMap()
-//        }
-//        get {
-//        return self.mapPoints
-//        }
-//    }
     // MARK: - Methods
     // MARK: View life cycle
     override func viewDidLoad() {
