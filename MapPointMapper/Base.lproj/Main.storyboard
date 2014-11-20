@@ -651,7 +651,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Map Point Mapper" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -724,11 +724,32 @@
                                     <action selector="removeLastLinePressed:" target="x5f-ay-aNI" id="HSe-1E-LyS"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rgX-34-8xf">
+                                <rect key="frame" x="50" y="8" width="52" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lat/Lng" id="Ap1-uN-N59">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nOr-Ud-bqT">
+                                <rect key="frame" x="9" y="26" width="133" height="32"/>
+                                <buttonCell key="cell" type="push" title="Switch Lat/Lng" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9WV-xl-hsp">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="switchLatLngPressed:" target="x5f-ay-aNI" id="2hu-M6-pRc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="LSh-zC-JDv" firstAttribute="centerX" secondItem="N5u-4y-0Q9" secondAttribute="centerX" id="1ut-jI-Uch"/>
+                            <constraint firstItem="nOr-Ud-bqT" firstAttribute="centerX" secondItem="N5u-4y-0Q9" secondAttribute="centerX" id="81q-Rw-tp6"/>
                             <constraint firstItem="zfK-eb-zSN" firstAttribute="leading" secondItem="B7T-Ob-fzQ" secondAttribute="leading" constant="33" id="AKa-FB-iWj"/>
+                            <constraint firstAttribute="bottom" secondItem="rgX-34-8xf" secondAttribute="bottom" constant="8" id="DNv-Bx-f49"/>
                             <constraint firstItem="zfK-eb-zSN" firstAttribute="top" secondItem="B7T-Ob-fzQ" secondAttribute="top" constant="20" id="EEv-3B-p4I"/>
+                            <constraint firstItem="rgX-34-8xf" firstAttribute="top" secondItem="nOr-Ud-bqT" secondAttribute="bottom" constant="8" id="HUU-Oj-r10"/>
                             <constraint firstItem="ZzA-3K-qLW" firstAttribute="top" secondItem="IDf-sq-Yq7" secondAttribute="bottom" constant="4" id="Hfy-7U-DgB"/>
                             <constraint firstItem="N5u-4y-0Q9" firstAttribute="top" secondItem="LSh-zC-JDv" secondAttribute="bottom" constant="12" id="Mnq-f3-uuq"/>
                             <constraint firstItem="mIA-fl-4xO" firstAttribute="leading" secondItem="ZzA-3K-qLW" secondAttribute="trailing" constant="8" id="PSs-5s-XbC"/>
@@ -739,6 +760,7 @@
                             <constraint firstItem="ZzA-3K-qLW" firstAttribute="leading" secondItem="IDf-sq-Yq7" secondAttribute="leading" id="gej-VO-hb0"/>
                             <constraint firstItem="mIA-fl-4xO" firstAttribute="top" secondItem="IDf-sq-Yq7" secondAttribute="bottom" constant="6" id="hmv-IB-z4l"/>
                             <constraint firstAttribute="bottom" secondItem="mIA-fl-4xO" secondAttribute="bottom" constant="6" id="kyp-Vi-3Dw"/>
+                            <constraint firstItem="nOr-Ud-bqT" firstAttribute="centerX" secondItem="rgX-34-8xf" secondAttribute="centerX" id="ptT-cQ-7Fj"/>
                             <constraint firstItem="LSh-zC-JDv" firstAttribute="top" secondItem="zfK-eb-zSN" secondAttribute="bottom" constant="12" id="qv1-Rh-uQ4"/>
                             <constraint firstAttribute="trailing" secondItem="IDf-sq-Yq7" secondAttribute="trailing" id="rsb-I2-xv9"/>
                             <constraint firstItem="zfK-eb-zSN" firstAttribute="centerX" secondItem="LSh-zC-JDv" secondAttribute="centerX" id="wfE-f4-YtA"/>
@@ -746,10 +768,13 @@
                     </view>
                     <connections>
                         <outlet property="addLineFromTextButton" destination="mIA-fl-4xO" id="8P0-uJ-XUm"/>
+                        <outlet property="latlngLabel" destination="rgX-34-8xf" id="EaC-8f-icT"/>
                         <outlet property="loadFileButton" destination="zfK-eb-zSN" id="dKo-Yb-Lvr"/>
                         <outlet property="mapview" destination="IDf-sq-Yq7" id="YPq-jQ-DYM"/>
                         <outlet property="removeAllLinesButton" destination="N5u-4y-0Q9" id="EDX-b6-NPh"/>
                         <outlet property="removeLastLineButton" destination="LSh-zC-JDv" id="8Cs-UX-5mQ"/>
+                        <outlet property="switchLatLngButton" destination="nOr-Ud-bqT" id="b4r-5W-2J2"/>
+                        <outlet property="switchLatLngPressed" destination="nOr-Ud-bqT" id="ETx-91-Sob"/>
                         <outlet property="textfield" destination="ZzA-3K-qLW" id="4P3-HM-weB"/>
                     </connections>
                 </viewController>

@@ -16,10 +16,13 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     @IBOutlet weak var removeLastLineButton: NSButton!
     @IBOutlet weak var removeAllLinesButton: NSButton!
     @IBOutlet weak var addLineFromTextButton: NSButton!
+    @IBOutlet weak var switchLatLngButton: NSButton!
     // MARK: Views
     @IBOutlet weak var mapview: MKMapView!
     @IBOutlet weak var textfield: NSTextField!
+    @IBOutlet weak var latlngLabel: NSTextField!
     
+    var parseLatitudeFirst = true
     // MARK: - Methods
     // MARK: View life cycle
     override func viewDidLoad() {
@@ -54,6 +57,15 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     @IBAction func removeAllLinesPressed(sender: NSButton) {
         mapview.removeOverlays(mapview.overlays)
     }
+    @IBAction func switchLatLngPressed(sender: NSButton) {
+        parseLatitudeFirst = !parseLatitudeFirst
+        if parseLatitudeFirst {
+            latlngLabel.stringValue = "Lat/Lng"
+        } else {
+            latlngLabel.stringValue = "Lng/Lat"
+        }
+    }
+    
     // MARK: MKMapDelegate
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         let renderer = MKPolylineRenderer(overlay: overlay)
@@ -121,8 +133,17 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         
         var mapPoints = [CLLocationCoordinate2D]()
         for var i = 0; i < components.count; i += 2 {
-            let one = components[i] as NSString
-            let two = components[i + 1] as NSString
+            var one: NSString
+            var two: NSString
+            // components[i] is latitude
+            // components[i + 1] is longitude
+            if parseLatitudeFirst {
+                one = components[i] as NSString
+                two = components[i + 1] as NSString
+            } else {
+                one = components[i + 1] as NSString
+                two = components[i] as NSString
+            }
             
             let lat = one.doubleValue
             let lng = two.doubleValue
