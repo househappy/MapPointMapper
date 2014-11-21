@@ -28,7 +28,6 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     // MARK: View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         mapview.delegate = self
         textfield.delegate = self
     }
@@ -85,8 +84,6 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     
     // MARK: - Private
     private func drawPointsOnMap(mapPoints: [CLLocationCoordinate2D]) {
-        
-        
         let coordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(mapPoints.count)
         
         var count: Int = 0
@@ -124,37 +121,6 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     private func parseInput(input: String) {
         
         let mapPoints = Parser.parseString(input)
-        /*
-        let stripped = input.stringByReplacingOccurrencesOfString(" ", withString: "", options: .CaseInsensitiveSearch, range: nil).stringByReplacingOccurrencesOfString("\n", withString: ",", options: .CaseInsensitiveSearch, range: nil)
-        
-        let components = stripped.componentsSeparatedByString(",")
-        
-        if components.count % 2 != 0 {
-            let error = NSError(domain: "com.dmiedema.MapPointMapper", code: -101, userInfo: [NSLocalizedDescriptionKey: "Invalid number of map points given"])
-            NSAlert(error: error)
-            return
-        }
-        
-        var mapPoints = [CLLocationCoordinate2D]()
-        for var i = 0; i < components.count; i += 2 {
-            var one: NSString
-            var two: NSString
-            // components[i] is latitude
-            // components[i + 1] is longitude
-            if parseLatitudeFirst {
-                one = components[i] as NSString
-                two = components[i + 1] as NSString
-            } else {
-                one = components[i + 1] as NSString
-                two = components[i] as NSString
-            }
-            
-            let lat = one.doubleValue
-            let lng = two.doubleValue
-            
-            mapPoints.append(CLLocationCoordinate2D(latitude: lat, longitude: lng))
-        }
-        */
         drawPointsOnMap(mapPoints)
     }
 }
