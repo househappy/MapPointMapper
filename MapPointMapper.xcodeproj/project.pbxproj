@@ -13,6 +13,7 @@
 		547424F11A1C1CE800A8478C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 547424EF1A1C1CE800A8478C /* Main.storyboard */; };
 		547424FD1A1C1CE800A8478C /* MapPointMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547424FC1A1C1CE800A8478C /* MapPointMapperTests.swift */; };
 		547425071A1C1D3D00A8478C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 547425061A1C1D3D00A8478C /* MapKit.framework */; };
+		547AAF8E1A1EDEAD00A0D174 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547AAF8D1A1EDEAD00A0D174 /* Parser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		547424FC1A1C1CE800A8478C /* MapPointMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointMapperTests.swift; sourceTree = "<group>"; };
 		547425061A1C1D3D00A8478C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		547425081A1C1D3D00A8478C /* MapPointMapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MapPointMapper.entitlements; sourceTree = "<group>"; };
+		547AAF8D1A1EDEAD00A0D174 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Parser/Parser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		547424E61A1C1CE800A8478C /* MapPointMapper */ = {
 			isa = PBXGroup;
 			children = (
+				547AAF8C1A1EDE8000A0D174 /* Parser */,
 				547425081A1C1D3D00A8478C /* MapPointMapper.entitlements */,
 				547424E91A1C1CE800A8478C /* AppDelegate.swift */,
 				547424EB1A1C1CE800A8478C /* ViewController.swift */,
@@ -113,6 +116,14 @@
 				547424FB1A1C1CE800A8478C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		547AAF8C1A1EDE8000A0D174 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				547AAF8D1A1EDEAD00A0D174 /* Parser.swift */,
+			);
+			name = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +233,7 @@
 			files = (
 				547424EC1A1C1CE800A8478C /* ViewController.swift in Sources */,
 				547424EA1A1C1CE800A8478C /* AppDelegate.swift in Sources */,
+				547AAF8E1A1EDEAD00A0D174 /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

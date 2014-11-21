@@ -17,6 +17,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     @IBOutlet weak var removeAllLinesButton: NSButton!
     @IBOutlet weak var addLineFromTextButton: NSButton!
     @IBOutlet weak var switchLatLngButton: NSButton!
+    @IBOutlet weak var colorWell: NSColorWell!
     // MARK: Views
     @IBOutlet weak var mapview: MKMapView!
     @IBOutlet weak var textfield: NSTextField!
@@ -59,10 +60,10 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     }
     @IBAction func switchLatLngPressed(sender: NSButton) {
         parseLatitudeFirst = !parseLatitudeFirst
-        if parseLatitudeFirst {
-            latlngLabel.stringValue = "Lat/Lng"
+        if self.parseLatitudeFirst {
+            self.latlngLabel.stringValue = "Lat/Lng"
         } else {
-            latlngLabel.stringValue = "Lng/Lat"
+            self.latlngLabel.stringValue = "Lng/Lat"
         }
     }
     
@@ -121,6 +122,9 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     } // end readFileAtURL
     
     private func parseInput(input: String) {
+        
+        let mapPoints = Parser.parseString(input)
+        /*
         let stripped = input.stringByReplacingOccurrencesOfString(" ", withString: "", options: .CaseInsensitiveSearch, range: nil).stringByReplacingOccurrencesOfString("\n", withString: ",", options: .CaseInsensitiveSearch, range: nil)
         
         let components = stripped.componentsSeparatedByString(",")
@@ -150,7 +154,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
             
             mapPoints.append(CLLocationCoordinate2D(latitude: lat, longitude: lng))
         }
-        
+        */
         drawPointsOnMap(mapPoints)
     }
 }
