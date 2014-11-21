@@ -85,11 +85,11 @@ class Parser {
             var lat: Double = 0.0
             var lng: Double = 0.0
             if longitudeFirst {
-                lat = (pair.1 as NSString).doubleValue
-                lng = (pair.0 as NSString).doubleValue
-            } else {
                 lat = (pair.0 as NSString).doubleValue
                 lng = (pair.1 as NSString).doubleValue
+            } else {
+                lat = (pair.1 as NSString).doubleValue
+                lng = (pair.0 as NSString).doubleValue
             }
             coordinates.append(CLLocationCoordinate2D(latitude: lat, longitude: lng))
         }
