@@ -117,7 +117,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         }
     } // end readFileAtURL
     
-    private func parseInput(input: String) {
+    private func parseInput(input: NSString) {
         
         let mapPoints = Parser.parseString(input)
         drawPointsOnMap(mapPoints)

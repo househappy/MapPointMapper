@@ -11,7 +11,7 @@ import MapKit
 
 class Parser {
     // MARK: - Public
-    class func parseString(input: String) -> [CLLocationCoordinate2D] {
+    class func parseString(input: NSString) -> [CLLocationCoordinate2D] {
         return self.init().parseInput(input)
     }
     
@@ -34,21 +34,30 @@ class Parser {
             
         } else {
             var first = ""
-            var array = Array<String>()
+            var array = Array<NSString>()
             
-            if let line = input as? String {
-                var str = line
+            if let line = input as? NSString {
+                var str: NSString = line
                 if isPolygon(line) || isMultipolygon(line) {
                     longitudeFirst = true
+//                    str = stripExtraneousCharacters(line)
+                    // Convert commas to new lines since that becomes our delimiter
                     str = stripExtraneousCharacters(line)
+                        .stringByReplacingOccurrencesOfString("(", withString: "")
+                        .stringByReplacingOccurrencesOfString(")", withString: "")
+                        .stringByReplacingOccurrencesOfString(", ", withString: "\n")
+                        .stringByReplacingOccurrencesOfString(" ", withString: ",")
+//                    str = str.stringByReplacingOccurrencesOfString(",", withString: "\n")
+//                    str = str.stringByReplacingOccurrencesOfString(" ", withString: ",")
                 }
-                str = str.stringByReplacingOccurrencesOfString("\n", withString: ",", options: .CaseInsensitiveSearch, range: nil)
+                str = str.stringByReplacingOccurrencesOfString("\n", withString: ",")
                 
-                array = str.componentsSeparatedByString(",")
+                array = str.componentsSeparatedByString(",") as [NSString]
                 
                 // array = array.filter { (s) -> Bool in !s.isEmpty }
-                array = array.filter { !$0.isEmpty }
+                array = array.filter { ($0.length > 0) }
                 
+                if array.isEmpty { return [] }
                 first = array.first!
             } else if let arr = input as? Array<String> {
                 array = arr
@@ -86,11 +95,11 @@ class Parser {
             var lat: Double = 0.0
             var lng: Double = 0.0
             if longitudeFirst {
-                lat = (pair.0 as NSString).doubleValue
-                lng = (pair.1 as NSString).doubleValue
-            } else {
                 lat = (pair.1 as NSString).doubleValue
                 lng = (pair.0 as NSString).doubleValue
+            } else {
+                lat = (pair.0 as NSString).doubleValue
+                lng = (pair.1 as NSString).doubleValue
             }
             coordinates.append(CLLocationCoordinate2D(latitude: lat, longitude: lng))
         }
