@@ -71,8 +71,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.alpha = 1.0
         renderer.lineWidth = 4.0
-        renderer.strokeColor = NSColor(red:59.0/255.0, green:173.0/255.0, blue:253.0/255.0, alpha:1)
-        
+        renderer.strokeColor = colorWell.color
         return renderer
     }
     // MARK: NSTextFieldDelegate

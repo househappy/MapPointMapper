@@ -33,7 +33,6 @@ class Parser {
         if let arr = input as? Array<Dictionary<String, String>> {
             
         } else {
-            var delimiter = ","
             var first = ""
             var array = Array<String>()
             
@@ -45,30 +44,32 @@ class Parser {
                 }
                 str = str.stringByReplacingOccurrencesOfString("\n", withString: ",", options: .CaseInsensitiveSearch, range: nil)
                 
-                // Figure out what kind of thing we're dealing with. Check polygon and type, etc
-                // and strip unnecessary items by this point.
-                
                 array = str.componentsSeparatedByString(",")
+                
+                // array = array.filter { (s) -> Bool in !s.isEmpty }
+                array = array.filter { !$0.isEmpty }
+                
                 first = array.first!
             } else if let arr = input as? Array<String> {
                 array = arr
                 first = arr.first!
             }
             
-            // Handle the case of only getting a single point.
-            // We add the point twice so that we can still draw a 'line' between the points
-            if array.count == 1 {
-                array.append(array.first!)
-            }
-            
             if isSpaceDelimited(first) {
-                delimiter = " "
+                let delimiter = " "
                 results = array.map { self.splitLine($0, delimiter: delimiter) }
             } else {
-                for var i = 0; i < array.count; i += 2 {
+//                array.map { self.splitLine("\($0),\($1)", delimiter: ",") }
+                for var i = 0; i < array.count - 1; i += 2 {
                     results.append((array[i], array[i + 1]))
                 }
             }
+        } // end else
+        
+        // Handle the case of only getting a single point.
+        // We add the point twice so that we can still draw a 'line' between the points
+        if results.count == 1 {
+            results.append(results.first!)
         }
         
         return convertToCoordinates(results)
