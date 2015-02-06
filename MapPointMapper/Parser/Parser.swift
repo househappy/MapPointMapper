@@ -11,15 +11,15 @@ import MapKit
 
 class Parser {
     // MARK: - Public
-    class func parseString(input: NSString) -> [CLLocationCoordinate2D] {
+    class func parseString(input: NSString) -> [[CLLocationCoordinate2D]] {
         return self.init().parseInput(input)
     }
     
-    class func parseArray(input: [String]) -> [CLLocationCoordinate2D] {
+    class func parseArray(input: [String]) -> [[CLLocationCoordinate2D]] {
         return self.init().parseInput(input)
     }
     
-    class func parseDictionary(input: [String: String]) -> [CLLocationCoordinate2D] {
+    class func parseDictionary(input: [String: String]) -> [[CLLocationCoordinate2D]] {
         return self.init().parseInput(input)
     }
     
@@ -27,61 +27,88 @@ class Parser {
     private var longitudeFirst = false
     
     // MARK: Parsing
-    private func parseInput(input: AnyObject) ->  [CLLocationCoordinate2D] {
-        var results = [(String, String)]()
+    private func parseInput(input: AnyObject) ->  [[CLLocationCoordinate2D]] {
+        var results = [[(String, String)]()]
         
         if let arr = input as? Array<Dictionary<String, String>> {
-            
         } else {
             var first = ""
-            var array = Array<NSString>()
+            var array = [[NSString]]()
             
             if let line = input as? NSString {
                 var str: NSString = line
-                if isPolygon(line) || isMultipolygon(line) {
+            
+                if isPolygon(line) {
                     longitudeFirst = true
-//                    str = stripExtraneousCharacters(line)
+                    var polygons = [NSString]()
+                    
+                    if isMultipolygon(line) {
+                        polygons = stripExtraneousCharacters(line).componentsSeparatedByString("), ")
+                    } else {
+                        polygons = [stripExtraneousCharacters(line)]
+                    }
+                    
+                    array = polygons.map({ self.formatPolygonString($0) }).map({ self.formatCustomLatLongString($0)})
+                    
+                    
                     // Convert commas to new lines since that becomes our delimiter
-                    str = stripExtraneousCharacters(line)
-                        .stringByReplacingOccurrencesOfString("(", withString: "")
-                        .stringByReplacingOccurrencesOfString(")", withString: "")
-                        .stringByReplacingOccurrencesOfString(", ", withString: "\n")
-                        .stringByReplacingOccurrencesOfString(" ", withString: ",")
-//                    str = str.stringByReplacingOccurrencesOfString(",", withString: "\n")
-//                    str = str.stringByReplacingOccurrencesOfString(" ", withString: ",")
+                } else {
+//                    str = str.stringByReplacingOccurrencesOfString("\n", withString: ",")
+//                    
+//                    array = [str.componentsSeparatedByString(",") as [NSString]]
+//                    
+//                    // array = array.filter { (s) -> Bool in !s.isEmpty }
+//                    array = array.filter { ($0.length > 0) }
+//                    
+//                    if array.isEmpty { return [] }
+//                    first = array.first!
                 }
-                str = str.stringByReplacingOccurrencesOfString("\n", withString: ",")
-                
-                array = str.componentsSeparatedByString(",") as [NSString]
-                
-                // array = array.filter { (s) -> Bool in !s.isEmpty }
-                array = array.filter { ($0.length > 0) }
-                
-                if array.isEmpty { return [] }
-                first = array.first!
-            } else if let arr = input as? Array<String> {
-                array = arr
-                first = arr.first!
+            } else if let arr = input as? [NSString] {
+//                array = arr
+//                first = arr.first!
             }
             
             if isSpaceDelimited(first) {
-                let delimiter = " "
-                results = array.map { self.splitLine($0, delimiter: delimiter) }
+//                let delimiter = " "
+//                results = array.map { self.splitLine($0, delimiter: delimiter) }
             } else {
 //                array.map { self.splitLine("\($0),\($1)", delimiter: ",") }
-                for var i = 0; i < array.count - 1; i += 2 {
-                    results.append((array[i], array[i + 1]))
+                var tmpResults = [(String, String)]()
+                for arr in array {
+                    for var i = 0; i < arr.count - 1; i += 2 {
+                        tmpResults.append((arr[i], arr[i + 1]))
+                    }
+                    if tmpResults.count == 1 {
+                        tmpResults.append(tmpResults.first!)
+                    }
+                    results.append(tmpResults)
+                    tmpResults.removeAll(keepCapacity: false)
                 }
+                
+                
             }
         } // end else
         
         // Handle the case of only getting a single point.
         // We add the point twice so that we can still draw a 'line' between the points
-        if results.count == 1 {
-            results.append(results.first!)
-        }
+//        if results.count == 1 {
+//            results.append(results.first!)
+//        }
         
-        return convertToCoordinates(results)
+        
+        return results.filter({ !$0.isEmpty }).map{ self.convertToCoordinates($0) }
+    }
+    
+    private func formatPolygonString(input: NSString) -> NSString {
+        return input
+            .stringByReplacingOccurrencesOfString("(", withString: "")
+            .stringByReplacingOccurrencesOfString(")", withString: "")
+            .stringByReplacingOccurrencesOfString(", ", withString: "\n")
+            .stringByReplacingOccurrencesOfString(" ", withString: ",")
+    }
+    
+    private func formatCustomLatLongString(input: NSString) -> [NSString] {
+        return input.stringByReplacingOccurrencesOfString("\n", withString: ",").componentsSeparatedByString(",") as [NSString]
     }
     
     private func splitLine(input: String, delimiter: String) -> (String, String) {

@@ -120,7 +120,9 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     private func parseInput(input: NSString) {
         
         let mapPoints = Parser.parseString(input)
-        drawPointsOnMap(mapPoints)
+        for line in mapPoints {
+            drawPointsOnMap(line)
+        }
     }
 }
 
