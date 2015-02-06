@@ -46,7 +46,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         if textfield.stringValue.isEmpty {
             return
         }
-        parseInput(textfield.stringValue)
+        parseInput(textfield.stringValue as NSString)
     }
     
     @IBAction func removeLastLinePressed(sender: NSButton) {
