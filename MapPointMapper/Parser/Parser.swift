@@ -38,7 +38,7 @@ class Parser {
         let line = input
     
         if isPolygon(line) {
-            longitudeFirst = true
+            self.longitudeFirst = true
             var polygons = [NSString]()
             
             if isMultipolygon(line) {
