@@ -9,102 +9,84 @@
 import Foundation
 import MapKit
 
+extension NSString {
+    var isEmpty: Bool {
+        get { return self.length == 0 || self.isEqualToString("") }
+    }
+}
+
 class Parser {
     // MARK: - Public
-    class func parseString(input: NSString) -> [[CLLocationCoordinate2D]] {
-        return self.init().parseInput(input)
+    class func parseString(input: NSString, longitudeFirst: Bool) -> [[CLLocationCoordinate2D]] {
+        return Parser(longitudeFirst: longitudeFirst).parseInput(input)
     }
     
-    class func parseArray(input: [String]) -> [[CLLocationCoordinate2D]] {
-        return self.init().parseInput(input)
-    }
-    
-    class func parseDictionary(input: [String: String]) -> [[CLLocationCoordinate2D]] {
-        return self.init().parseInput(input)
+    var longitudeFirst = false
+    convenience init(longitudeFirst: Bool) {
+        self.init()
+        self.longitudeFirst = longitudeFirst
     }
     
     // MARK: - Private
-    private var longitudeFirst = false
     
     // MARK: Parsing
-    private func parseInput(input: AnyObject) ->  [[CLLocationCoordinate2D]] {
+    private func parseInput(input: NSString) ->  [[CLLocationCoordinate2D]] {
         var results = [[(String, String)]()]
         
-        if let arr = input as? Array<Dictionary<String, String>> {
-        } else {
-            var first = ""
-            var array = [[NSString]]()
+        var array = [[NSString]]()
+        
+        let line = input
+    
+        if isPolygon(line) {
+            longitudeFirst = true
+            var polygons = [NSString]()
             
-            if let line = input as? NSString {
-                var str: NSString = line
-            
-                if isPolygon(line) {
-                    longitudeFirst = true
-                    var polygons = [NSString]()
-                    
-                    if isMultipolygon(line) {
-                        polygons = stripExtraneousCharacters(line).componentsSeparatedByString("), ")
-                    } else {
-                        polygons = [stripExtraneousCharacters(line)]
-                    }
-                    
-                    array = polygons.map({ self.formatPolygonString($0) }).map({ self.formatCustomLatLongString($0)})
-                    
-                    
-                    // Convert commas to new lines since that becomes our delimiter
-                } else {
-//                    str = str.stringByReplacingOccurrencesOfString("\n", withString: ",")
-//                    
-//                    array = [str.componentsSeparatedByString(",") as [NSString]]
-//                    
-//                    // array = array.filter { (s) -> Bool in !s.isEmpty }
-//                    array = array.filter { ($0.length > 0) }
-//                    
-//                    if array.isEmpty { return [] }
-//                    first = array.first!
-                }
-            } else if let arr = input as? [NSString] {
-//                array = arr
-//                first = arr.first!
-            }
-            
-            if isSpaceDelimited(first) {
-//                let delimiter = " "
-//                results = array.map { self.splitLine($0, delimiter: delimiter) }
+            if isMultipolygon(line) {
+                polygons = stripExtraneousCharacters(line).componentsSeparatedByString("), ")
             } else {
-//                array.map { self.splitLine("\($0),\($1)", delimiter: ",") }
-                var tmpResults = [(String, String)]()
-                for arr in array {
-                    for var i = 0; i < arr.count - 1; i += 2 {
-                        tmpResults.append((arr[i], arr[i + 1]))
-                    }
-                    if tmpResults.count == 1 {
-                        tmpResults.append(tmpResults.first!)
-                    }
-                    results.append(tmpResults)
-                    tmpResults.removeAll(keepCapacity: false)
-                }
-                
-                
+                polygons = [stripExtraneousCharacters(line)]
             }
-        } // end else
+            
+            array = polygons.map({ self.formatPolygonString($0) })
+            
+        } else { // not a polygon
+
+        }
         
-        // Handle the case of only getting a single point.
-        // We add the point twice so that we can still draw a 'line' between the points
-//        if results.count == 1 {
-//            results.append(results.first!)
-//        }
+        var tmpResults = [(String, String)]()
+        for arr in array {
+            for var i = 0; i < arr.count - 1; i += 2 {
+                tmpResults.append((arr[i], arr[i + 1]))
+            }
+            
+            if tmpResults.count == 1 {
+                tmpResults.append(tmpResults.first!)
+            }
+            
+            results.append(tmpResults)
+            tmpResults.removeAll(keepCapacity: false)
+        } // end for arr in array
         
-        
-        return results.filter({ !$0.isEmpty }).map{ self.convertToCoordinates($0) }
+        return results.filter({ !$0.isEmpty }).map{ self.convertToCoordinates($0, longitudeFirst: self.longitudeFirst) }
     }
     
-    private func formatPolygonString(input: NSString) -> NSString {
-        return input
+    private func formatPolygonString(input: NSString) -> [NSString] {
+        // Remove Extra ()
+        let stripped = input
             .stringByReplacingOccurrencesOfString("(", withString: "")
             .stringByReplacingOccurrencesOfString(")", withString: "")
-            .stringByReplacingOccurrencesOfString(", ", withString: "\n")
-            .stringByReplacingOccurrencesOfString(" ", withString: ",")
+        
+        // Break on ','
+        let pairs = stripped.componentsSeparatedByString(",")
+        
+        // break on " " and remove empties
+        var filtered = [NSString]()
+        
+        for pair in pairs {
+            pair.componentsSeparatedByString(" ").filter({!$0.isEmpty}).map({filtered.append($0)})
+        }
+        
+        return filtered
     }
     
     private func formatCustomLatLongString(input: NSString) -> [NSString] {
@@ -116,7 +98,10 @@ class Parser {
         return (array.first!, array.last!)
     }
     
-    private func convertToCoordinates(pairs: [(String, String)]) -> [CLLocationCoordinate2D] {
+    /**
+    Convert [(String, String)] array of tuples into a [CLLocationCoordinate2D]
+    */
+    private func convertToCoordinates(pairs: [(String, String)], longitudeFirst: Bool) -> [CLLocationCoordinate2D] {
         var coordinates = [CLLocationCoordinate2D]()
         for pair in pairs {
             var lat: Double = 0.0
@@ -133,6 +118,16 @@ class Parser {
         return coordinates
     }
     
+    /**
+    Removes any text before lat long points as well as two outer sets of parens.
+    
+    Example:
+    input  => "POLYGON(( 15 32 ))"
+    output => "15 32"
+    
+    input  => "MULTIPOLYGON((( 15 32 )))"
+    output => "( 15 32 )"
+    */
     private func stripExtraneousCharacters(input: String) -> String {
         let regex = NSRegularExpression(pattern: "\\w+ \\(\\((.*)\\)\\)", options: .CaseInsensitive, error: nil)
         let match: AnyObject? = regex?.matchesInString(input, options: .ReportCompletion, range: NSMakeRange(0, input.utf16Count)).first

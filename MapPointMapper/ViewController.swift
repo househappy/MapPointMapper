@@ -23,7 +23,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     @IBOutlet weak var textfield: NSTextField!
     @IBOutlet weak var latlngLabel: NSTextField!
     
-    var parseLatitudeFirst = true
+    var parseLongitudeFirst = false
     // MARK: - Methods
     // MARK: View life cycle
     override func viewDidLoad() {
@@ -58,11 +58,11 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         mapview.removeOverlays(mapview.overlays)
     }
     @IBAction func switchLatLngPressed(sender: NSButton) {
-        parseLatitudeFirst = !parseLatitudeFirst
-        if self.parseLatitudeFirst {
-            self.latlngLabel.stringValue = "Lat/Lng"
-        } else {
+        parseLongitudeFirst = !parseLongitudeFirst
+        if self.parseLongitudeFirst {
             self.latlngLabel.stringValue = "Lng/Lat"
+        } else {
+            self.latlngLabel.stringValue = "Lat/Lng"
         }
     }
     
@@ -119,7 +119,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     
     private func parseInput(input: NSString) {
         
-        let mapPoints = Parser.parseString(input)
+        let mapPoints = Parser.parseString(input, longitudeFirst: parseLongitudeFirst)
         for line in mapPoints {
             drawPointsOnMap(line)
         }
