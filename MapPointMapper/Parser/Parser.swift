@@ -42,7 +42,7 @@ class Parser {
             var polygons = [NSString]()
             
             if isMultipolygon(line) {
-                polygons = stripExtraneousCharacters(line).componentsSeparatedByString("), ")
+                polygons = stripExtraneousCharacters(line).componentsSeparatedByString("),")
             } else {
                 polygons = [stripExtraneousCharacters(line)]
             }
@@ -129,7 +129,7 @@ class Parser {
     output => "( 15 32 )"
     */
     private func stripExtraneousCharacters(input: String) -> String {
-        let regex = NSRegularExpression(pattern: "\\w+ \\(\\((.*)\\)\\)", options: .CaseInsensitive, error: nil)
+        let regex = NSRegularExpression(pattern: "\\w+\\s+\\(\\((.*)\\)\\)", options: .CaseInsensitive, error: nil)
         let match: AnyObject? = regex?.matchesInString(input, options: .ReportCompletion, range: NSMakeRange(0, input.utf16Count)).first
         let range = match?.rangeAtIndex(1)
         
@@ -140,14 +140,14 @@ class Parser {
     }
     
     private func isPolygon(input: String) -> Bool {
-        if let isPolygon = input.rangeOfString("POLYGON ", options: .RegularExpressionSearch) {
+        if let isPolygon = input.rangeOfString("POLYGON", options: .RegularExpressionSearch) {
             return true
         }
         return false
     }
     
     private func isMultipolygon(input: String) -> Bool {
-        if let isPolygon = input.rangeOfString("MULTIPOLYGON ", options: .RegularExpressionSearch) {
+        if let isPolygon = input.rangeOfString("MULTIPOLYGON", options: .RegularExpressionSearch) {
             return true
         }
         return false
