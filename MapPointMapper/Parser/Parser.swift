@@ -37,21 +37,18 @@ class Parser {
         
         let line = input
     
-        if isPolygon(line) {
+        if isProbablyGeoString(line) {
             self.longitudeFirst = true
-            var polygons = [NSString]()
+            var items = [NSString]()
             
-            if isMultipolygon(line) {
-                polygons = stripExtraneousCharacters(line).componentsSeparatedByString("),") as [NSString]
+            if isMultiItem(line) {
+                items = stripExtraneousCharacters(line).componentsSeparatedByString("),") as [NSString]
             } else {
-                polygons = [stripExtraneousCharacters(line)]
+                items = [stripExtraneousCharacters(line)]
             }
             
-            array = polygons.map({ self.formatStandardGeoDataString($0) })
+            array = items.map({ self.formatStandardGeoDataString($0) })
             
-        } else {
-            if isLine(line) { self.longitudeFirst = true }
-            array = [stripExtraneousCharacters(line)].map({ self.formatStandardGeoDataString($0) })
         }
         
         var tmpResults = [(NSString, NSString)]()
@@ -140,22 +137,15 @@ class Parser {
         return (input as NSString).substringWithRange(NSRange(location: loc, length: len)) as NSString
     }
     
-    private func isPolygon(input: String) -> Bool {
-        if let isPolygon = input.rangeOfString("POLYGON", options: .RegularExpressionSearch) {
+    private func isProbablyGeoString(input: String) -> Bool {
+        if let geoString = input.rangeOfString("\\w+", options: .RegularExpressionSearch) {
             return true
         }
         return false
     }
     
-    private func isMultipolygon(input: String) -> Bool {
-        if let isPolygon = input.rangeOfString("MULTIPOLYGON", options: .RegularExpressionSearch) {
-            return true
-        }
-        return false
-    }
-    
-    private func isLine(input: String) -> Bool  {
-        if let isLine = input.rangeOfString("LINE", options: .RegularExpressionSearch) {
+    private func isMultiItem(input: String) -> Bool {
+        if let isPolygon = input.rangeOfString("MULTI", options: .RegularExpressionSearch) {
             return true
         }
         return false
