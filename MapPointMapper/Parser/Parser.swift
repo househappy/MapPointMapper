@@ -49,10 +49,8 @@ class Parser {
             
             array = polygons.map({ self.formatStandardGeoDataString($0) })
             
-        } else if isLine(line) { // not a polygon
-            self.longitudeFirst = true
-            array = [stripExtraneousCharacters(line)].map({ self.formatStandardGeoDataString($0) })
-        } else { // Totally unknown
+        } else {
+            if isLine(line) { self.longitudeFirst = true }
             array = [stripExtraneousCharacters(line)].map({ self.formatStandardGeoDataString($0) })
         }
         
