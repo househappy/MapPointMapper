@@ -47,10 +47,13 @@ class Parser {
                 polygons = [stripExtraneousCharacters(line)]
             }
             
-            array = polygons.map({ self.formatPolygonString($0) })
+            array = polygons.map({ self.formatStandardGeoDataString($0) })
             
-        } else { // not a polygon
-
+        } else if isLine(line) { // not a polygon
+            self.longitudeFirst = true
+            array = [stripExtraneousCharacters(line)].map({ self.formatStandardGeoDataString($0) })
+        } else { // Totally unknown
+            array = [stripExtraneousCharacters(line)].map({ self.formatStandardGeoDataString($0) })
         }
         
         var tmpResults = [(NSString, NSString)]()
@@ -70,13 +73,13 @@ class Parser {
         return results.filter({ !$0.isEmpty }).map{ self.convertToCoordinates($0, longitudeFirst: self.longitudeFirst) }
     }
     
-    private func formatPolygonString(input: NSString) -> [NSString] {
+    private func formatStandardGeoDataString(input: NSString) -> [NSString] {
         // Remove Extra ()
         let stripped = input
             .stringByReplacingOccurrencesOfString("(", withString: "")
             .stringByReplacingOccurrencesOfString(")", withString: "")
         
-        // Break on ','
+        // Break on ',' to get pairs separated by ' '
         let pairs = stripped.componentsSeparatedByString(",")
         
         // break on " " and remove empties
@@ -148,6 +151,13 @@ class Parser {
     
     private func isMultipolygon(input: String) -> Bool {
         if let isPolygon = input.rangeOfString("MULTIPOLYGON", options: .RegularExpressionSearch) {
+            return true
+        }
+        return false
+    }
+    
+    private func isLine(input: String) -> Bool  {
+        if let isLine = input.rangeOfString("LINE", options: .RegularExpressionSearch) {
             return true
         }
         return false
