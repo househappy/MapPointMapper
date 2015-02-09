@@ -31,7 +31,7 @@ class Parser {
     
     // MARK: Parsing
     private func parseInput(input: NSString) ->  [[CLLocationCoordinate2D]] {
-        var results = [[(String, String)]()]
+        var results = [[(NSString, NSString)]()]
         
         var array = [[NSString]]()
         
@@ -42,7 +42,7 @@ class Parser {
             var polygons = [NSString]()
             
             if isMultipolygon(line) {
-                polygons = stripExtraneousCharacters(line).componentsSeparatedByString("),")
+                polygons = stripExtraneousCharacters(line).componentsSeparatedByString("),") as [NSString]
             } else {
                 polygons = [stripExtraneousCharacters(line)]
             }
@@ -53,7 +53,7 @@ class Parser {
 
         }
         
-        var tmpResults = [(String, String)]()
+        var tmpResults = [(NSString, NSString)]()
         for arr in array {
             for var i = 0; i < arr.count - 1; i += 2 {
                 tmpResults.append((arr[i], arr[i + 1]))
@@ -93,25 +93,25 @@ class Parser {
         return input.stringByReplacingOccurrencesOfString("\n", withString: ",").componentsSeparatedByString(",") as [NSString]
     }
     
-    private func splitLine(input: String, delimiter: String) -> (String, String) {
+    private func splitLine(input: NSString, delimiter: NSString) -> (NSString, NSString) {
         let array = input.componentsSeparatedByString(delimiter)
-        return (array.first!, array.last!)
+        return (array.first! as NSString, array.last! as NSString)
     }
     
     /**
     Convert [(String, String)] array of tuples into a [CLLocationCoordinate2D]
     */
-    private func convertToCoordinates(pairs: [(String, String)], longitudeFirst: Bool) -> [CLLocationCoordinate2D] {
+    private func convertToCoordinates(pairs: [(NSString, NSString)], longitudeFirst: Bool) -> [CLLocationCoordinate2D] {
         var coordinates = [CLLocationCoordinate2D]()
         for pair in pairs {
             var lat: Double = 0.0
             var lng: Double = 0.0
             if longitudeFirst {
-                lat = (pair.1 as NSString).doubleValue
-                lng = (pair.0 as NSString).doubleValue
+                lat = pair.1.doubleValue
+                lng = pair.0.doubleValue
             } else {
-                lat = (pair.0 as NSString).doubleValue
-                lng = (pair.1 as NSString).doubleValue
+                lat = pair.0.doubleValue
+                lng = pair.1.doubleValue
             }
             coordinates.append(CLLocationCoordinate2D(latitude: lat, longitude: lng))
         }
@@ -128,15 +128,15 @@ class Parser {
     input  => "MULTIPOLYGON((( 15 32 )))"
     output => "( 15 32 )"
     */
-    private func stripExtraneousCharacters(input: String) -> String {
+    private func stripExtraneousCharacters(input: NSString) -> NSString {
         let regex = NSRegularExpression(pattern: "\\w+\\s+\\(\\((.*)\\)\\)", options: .CaseInsensitive, error: nil)
-        let match: AnyObject? = regex?.matchesInString(input, options: .ReportCompletion, range: NSMakeRange(0, input.utf16Count)).first
+        let match: AnyObject? = regex?.matchesInString(input, options: .ReportCompletion, range: NSMakeRange(0, input.length)).first
         let range = match?.rangeAtIndex(1)
         
         let loc = range?.location as Int!
         let len = range?.length as Int!
         
-        return (input as NSString).substringWithRange(NSRange(location: loc, length: len))
+        return (input as NSString).substringWithRange(NSRange(location: loc, length: len)) as NSString
     }
     
     private func isPolygon(input: String) -> Bool {
