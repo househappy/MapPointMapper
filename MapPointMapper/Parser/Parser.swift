@@ -26,13 +26,12 @@ class Parser {
         self.init()
         self.longitudeFirst = longitudeFirst
     }
+    init() {}
     
     // MARK: - Private
     
     // MARK: Parsing
-    private func parseInput(input: NSString) ->  [[CLLocationCoordinate2D]] {
-        var results = [[(NSString, NSString)]()]
-        
+    internal func parseInput(input: NSString) ->  [[CLLocationCoordinate2D]] {
         var array = [[NSString]]()
         
         let line = input
@@ -51,7 +50,14 @@ class Parser {
             
         }
         
+        let results = convertStringArraysToTuples(array)
+        
+        return results.filter({ !$0.isEmpty }).map{ self.convertToCoordinates($0, longitudeFirst: self.longitudeFirst) }
+    }
+    
+    internal func convertStringArraysToTuples(array: [[NSString]]) -> [[(NSString, NSString)]] {
         var tmpResults = [(NSString, NSString)]()
+        var results = [[(NSString, NSString)]]()
         for arr in array {
             for var i = 0; i < arr.count - 1; i += 2 {
                 tmpResults.append((arr[i], arr[i + 1]))
@@ -64,11 +70,10 @@ class Parser {
             results.append(tmpResults)
             tmpResults.removeAll(keepCapacity: false)
         } // end for arr in array
-        
-        return results.filter({ !$0.isEmpty }).map{ self.convertToCoordinates($0, longitudeFirst: self.longitudeFirst) }
+        return results
     }
     
-    private func formatStandardGeoDataString(input: NSString) -> [NSString] {
+    internal func formatStandardGeoDataString(input: NSString) -> [NSString] {
         // Remove Extra ()
         let stripped = input
             .stringByReplacingOccurrencesOfString("(", withString: "")
@@ -84,7 +89,7 @@ class Parser {
             pair.componentsSeparatedByString(" ").filter({!$0.isEmpty}).map({filtered.append($0)})
         }
         
-        return filtered
+        return filtered.filter({!$0.isEmpty})
     }
     
     private func formatCustomLatLongString(input: NSString) -> [NSString] {
@@ -99,7 +104,7 @@ class Parser {
     /**
     Convert [(String, String)] array of tuples into a [CLLocationCoordinate2D]
     */
-    private func convertToCoordinates(pairs: [(NSString, NSString)], longitudeFirst: Bool) -> [CLLocationCoordinate2D] {
+    internal func convertToCoordinates(pairs: [(NSString, NSString)], longitudeFirst: Bool) -> [CLLocationCoordinate2D] {
         var coordinates = [CLLocationCoordinate2D]()
         for pair in pairs {
             var lat: Double = 0.0
@@ -126,8 +131,8 @@ class Parser {
     input  => "MULTIPOLYGON((( 15 32 )))"
     output => "( 15 32 )"
     */
-    private func stripExtraneousCharacters(input: NSString) -> NSString {
-        let regex = NSRegularExpression(pattern: "\\w+\\s+\\(\\((.*)\\)\\)", options: .CaseInsensitive, error: nil)
+    internal func stripExtraneousCharacters(input: NSString) -> NSString {
+        let regex = NSRegularExpression(pattern: "\\D+\\s+\\((.*)\\)", options: .CaseInsensitive, error: nil)
         let match: AnyObject? = regex?.matchesInString(input, options: .ReportCompletion, range: NSMakeRange(0, input.length)).first
         let range = match?.rangeAtIndex(1)
         
@@ -137,14 +142,14 @@ class Parser {
         return (input as NSString).substringWithRange(NSRange(location: loc, length: len)) as NSString
     }
     
-    private func isProbablyGeoString(input: String) -> Bool {
-        if let geoString = input.rangeOfString("\\w+", options: .RegularExpressionSearch) {
+    internal func isProbablyGeoString(input: String) -> Bool {
+        if let geoString = input.rangeOfString("^\\D+", options: .RegularExpressionSearch) {
             return true
         }
         return false
     }
     
-    private func isMultiItem(input: String) -> Bool {
+    internal func isMultiItem(input: String) -> Bool {
         if let isPolygon = input.rangeOfString("MULTI", options: .RegularExpressionSearch) {
             return true
         }
