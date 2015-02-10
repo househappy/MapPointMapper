@@ -14,6 +14,8 @@
 		547424FD1A1C1CE800A8478C /* MapPointMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547424FC1A1C1CE800A8478C /* MapPointMapperTests.swift */; };
 		547425071A1C1D3D00A8478C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 547425061A1C1D3D00A8478C /* MapKit.framework */; };
 		547AAF8E1A1EDEAD00A0D174 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547AAF8D1A1EDEAD00A0D174 /* Parser.swift */; };
+		54B987061A895EF200D541F4 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B987051A895EF200D541F4 /* ParserTests.swift */; };
+		54B987081A896BF600D541F4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547AAF8D1A1EDEAD00A0D174 /* Parser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,7 @@
 		547425061A1C1D3D00A8478C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		547425081A1C1D3D00A8478C /* MapPointMapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MapPointMapper.entitlements; sourceTree = "<group>"; };
 		547AAF8D1A1EDEAD00A0D174 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Parser/Parser.swift; sourceTree = "<group>"; };
+		54B987051A895EF200D541F4 /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = ParserTests.swift; path = Parser/ParserTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,7 @@
 		547424F91A1C1CE800A8478C /* MapPointMapperTests */ = {
 			isa = PBXGroup;
 			children = (
+				54B987041A895EDB00D541F4 /* Parser */,
 				547424FC1A1C1CE800A8478C /* MapPointMapperTests.swift */,
 				547424FA1A1C1CE800A8478C /* Supporting Files */,
 			);
@@ -122,6 +126,14 @@
 			isa = PBXGroup;
 			children = (
 				547AAF8D1A1EDEAD00A0D174 /* Parser.swift */,
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
+		54B987041A895EDB00D541F4 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				54B987051A895EF200D541F4 /* ParserTests.swift */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -241,7 +253,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54B987061A895EF200D541F4 /* ParserTests.swift in Sources */,
 				547424FD1A1C1CE800A8478C /* MapPointMapperTests.swift in Sources */,
+				54B987081A896BF600D541F4 /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +300,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -329,6 +344,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -360,6 +376,10 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
@@ -395,6 +415,10 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
@@ -422,6 +446,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -442,6 +467,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = MapPointMapperTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
