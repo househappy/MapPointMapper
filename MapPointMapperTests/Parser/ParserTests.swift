@@ -19,7 +19,7 @@ let multiPoint   = "MULTIPOINT ((10 40), (40 30), (20 20), (30 10))"
 let multiLine    = "MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))"
 
 class ParserSpec: XCTestCase {
-  let parser = Parser()
+  var parser: Parser!
   
   func testParserRecognizesGeoSpacialStrings() {
     XCTAssertTrue(parser.isProbablyGeoString(line), "'line' should be a geospacial string")
@@ -102,12 +102,6 @@ class ParserSpec: XCTestCase {
   // MARK: - Setup
   override func setUp() {
     super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    
-  }
-  
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
+    self.parser = Parser()
   }
 }
