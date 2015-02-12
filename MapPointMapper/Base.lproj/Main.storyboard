@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
         <plugIn identifier="com.apple.MapKitIBPlugin" version="6254"/>
@@ -754,7 +754,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qSu-Jo-iuV">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qSu-Jo-iuV">
                                 <rect key="frame" x="24" y="59" width="104" height="32"/>
                                 <buttonCell key="cell" type="push" title="Center US" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DbO-N9-kDS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -777,11 +777,13 @@
                             <constraint firstItem="mIA-fl-4xO" firstAttribute="leading" secondItem="ZzA-3K-qLW" secondAttribute="trailing" constant="8" id="PSs-5s-XbC"/>
                             <constraint firstAttribute="bottom" secondItem="ZzA-3K-qLW" secondAttribute="bottom" constant="7" id="QsB-B6-lJv"/>
                             <constraint firstItem="IDf-sq-Yq7" firstAttribute="top" secondItem="B7T-Ob-fzQ" secondAttribute="top" id="T1c-t8-j8i"/>
+                            <constraint firstItem="nOr-Ud-bqT" firstAttribute="centerX" secondItem="qSu-Jo-iuV" secondAttribute="centerX" id="Tim-OR-rnR"/>
                             <constraint firstAttribute="trailing" secondItem="mIA-fl-4xO" secondAttribute="trailing" constant="20" id="atY-mY-yty"/>
                             <constraint firstItem="IDf-sq-Yq7" firstAttribute="leading" secondItem="LSh-zC-JDv" secondAttribute="trailing" constant="15" id="feN-0l-sxi"/>
                             <constraint firstItem="ZzA-3K-qLW" firstAttribute="leading" secondItem="IDf-sq-Yq7" secondAttribute="leading" id="gej-VO-hb0"/>
                             <constraint firstItem="mIA-fl-4xO" firstAttribute="top" secondItem="IDf-sq-Yq7" secondAttribute="bottom" constant="6" id="hmv-IB-z4l"/>
                             <constraint firstAttribute="bottom" secondItem="mIA-fl-4xO" secondAttribute="bottom" constant="6" id="kyp-Vi-3Dw"/>
+                            <constraint firstItem="nOr-Ud-bqT" firstAttribute="top" secondItem="qSu-Jo-iuV" secondAttribute="bottom" constant="12" id="l9r-Ab-ASV"/>
                             <constraint firstItem="nOr-Ud-bqT" firstAttribute="centerX" secondItem="rgX-34-8xf" secondAttribute="centerX" id="ptT-cQ-7Fj"/>
                             <constraint firstItem="LSh-zC-JDv" firstAttribute="top" secondItem="zfK-eb-zSN" secondAttribute="bottom" constant="12" id="qv1-Rh-uQ4"/>
                             <constraint firstAttribute="trailing" secondItem="IDf-sq-Yq7" secondAttribute="trailing" id="rsb-I2-xv9"/>
