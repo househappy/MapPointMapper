@@ -17,6 +17,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     @IBOutlet weak var removeAllLinesButton: NSButton!
     @IBOutlet weak var addLineFromTextButton: NSButton!
     @IBOutlet weak var switchLatLngButton: NSButton!
+    @IBOutlet weak var centerUSButton: NSButton!
     @IBOutlet weak var colorWell: NSColorWell!
     // MARK: Views
     @IBOutlet weak var mapview: MKMapView!
@@ -65,7 +66,27 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
             self.latlngLabel.stringValue = "Lat/Lng"
         }
     }
-    
+    @IBAction func centerUSPressed(sender: NSButton) {
+        let centerUS = CLLocationCoordinate2D(
+            latitude: 37.09024,
+            longitude: -95.712891
+        )
+        let northeastUS = CLLocationCoordinate2D(
+            latitude: 49.38,
+            longitude: -66.94
+        )
+        let southwestUS = CLLocationCoordinate2D(
+            latitude: 25.82,
+            longitude: -124.39
+        )
+        let latDelta = northeastUS.latitude - southwestUS.latitude
+        let lngDelta = northeastUS.longitude - southwestUS.longitude
+        let span = MKCoordinateSpanMake(latDelta, lngDelta)
+
+        let usRegion = MKCoordinateRegion(center: centerUS, span: span)
+        mapview.setRegion(usRegion, animated: true)
+    }
+
     // MARK: MKMapDelegate
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         let renderer = MKPolylineRenderer(overlay: overlay)
