@@ -10,8 +10,19 @@ import Foundation
 import MapKit
 
 extension NSString {
+    /*!
+    */
     var isEmpty: Bool {
         get { return self.length == 0 || self.isEqualToString("") }
+    }
+}
+extension String {
+    /*!
+    */
+    func stringByStrippingLeadingAndTrailingWhiteSpace() -> String {
+        let mutable = self.mutableCopy() as NSMutableString
+        CFStringTrimWhitespace(mutable)
+        return mutable.copy() as String
     }
 }
 
@@ -132,6 +143,7 @@ class Parser {
     output => "( 15 32 )"
     */
     internal func stripExtraneousCharacters(input: NSString) -> NSString {
+
         let regex = NSRegularExpression(pattern: "\\D+\\s+\\((.*)\\)", options: .CaseInsensitive, error: nil)
         let match: AnyObject? = regex?.matchesInString(input, options: .ReportCompletion, range: NSMakeRange(0, input.length)).first
         let range = match?.rangeAtIndex(1)
@@ -143,7 +155,8 @@ class Parser {
     }
     
     internal func isProbablyGeoString(input: String) -> Bool {
-        if let geoString = input.rangeOfString("^\\D+", options: .RegularExpressionSearch) {
+        let stripped = input.stringByStrippingLeadingAndTrailingWhiteSpace()
+        if let geoString = stripped.rangeOfString("^\\w+", options: .RegularExpressionSearch) {
             return true
         }
         return false
