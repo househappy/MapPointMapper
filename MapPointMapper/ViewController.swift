@@ -18,6 +18,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     @IBOutlet weak var addLineFromTextButton: NSButton!
     @IBOutlet weak var switchLatLngButton: NSButton!
     @IBOutlet weak var centerUSButton: NSButton!
+    @IBOutlet weak var centerAllLinesButton: NSButton!
     @IBOutlet weak var colorWell: NSColorWell!
     // MARK: Views
     @IBOutlet weak var mapview: MKMapView!
@@ -55,9 +56,11 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
             mapview.removeOverlay(overlay as MKOverlay)
         }
     }
+    
     @IBAction func removeAllLinesPressed(sender: NSButton) {
         mapview.removeOverlays(mapview.overlays)
     }
+    
     @IBAction func switchLatLngPressed(sender: NSButton) {
         parseLongitudeFirst = !parseLongitudeFirst
         if self.parseLongitudeFirst {
@@ -66,6 +69,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
             self.latlngLabel.stringValue = "Lat/Lng"
         }
     }
+    
     @IBAction func centerUSPressed(sender: NSButton) {
         let centerUS = CLLocationCoordinate2D(
             latitude: 37.09024,
@@ -87,6 +91,12 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         mapview.setRegion(usRegion, animated: true)
     }
 
+    @IBAction func centerAllLinesPressed(sender: NSButton) {
+        let polylines = mapview.overlays as [MKOverlay]
+        let boundingMapRect = boundingMapRectForPolylines(polylines)
+        mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
+    }
+    
     // MARK: MKMapDelegate
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         let renderer = MKPolylineRenderer(overlay: overlay)
@@ -103,7 +113,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     }
     
     // MARK: - Private
-    private func drawPointsOnMap(mapPoints: [CLLocationCoordinate2D]) {
+    private func createPolylineForCoordinates(mapPoints: [CLLocationCoordinate2D]) -> MKOverlay {
         let coordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(mapPoints.count)
         
         var count: Int = 0
@@ -114,10 +124,32 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         
         let polyline = MKPolyline(coordinates: coordinates, count: count)
         
-        mapview.addOverlay(polyline, level: .AboveRoads)
-        mapview.setVisibleMapRect(polyline.boundingMapRect, animated: true)
-        
         free(coordinates)
+        
+        return polyline
+    }
+    
+    private func boundingMapRectForPolylines(polylines: [MKOverlay]) -> MKMapRect {
+        var minX = Double.infinity
+        var minY = Double.infinity
+        var maxX = Double(0)
+        var maxY = Double(0)
+        
+        for line in polylines {
+            minX   = (line.boundingMapRect.origin.x < minX)      ? line.boundingMapRect.origin.x    : minX
+            minY   = (line.boundingMapRect.origin.y < minY)      ? line.boundingMapRect.origin.y    : minY
+            
+            let width  = line.boundingMapRect.origin.x + line.boundingMapRect.size.width
+            maxX = (width > maxX) ? width : maxX
+            
+            let height = line.boundingMapRect.origin.y + line.boundingMapRect.size.height
+            maxY = (height > maxY) ? height : maxY
+        }
+        
+        let mapWidth  = maxX - minX
+        let mapHeight = maxY - minY
+        
+        return MKMapRect(origin: MKMapPoint(x: minX, y: minY), size: MKMapSize(width: mapWidth, height: mapHeight))
     }
     
     private func readFileAtURL(passedURL: NSURL?) {
@@ -140,10 +172,17 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     
     private func parseInput(input: NSString) {
         
-        let mapPoints = Parser.parseString(input, longitudeFirst: parseLongitudeFirst)
-        for line in mapPoints {
-            drawPointsOnMap(line)
+        let coordinates = Parser.parseString(input, longitudeFirst: parseLongitudeFirst)
+        
+        var polylines = [MKOverlay]()
+        for coordianteSet in coordinates {
+            let polyline = createPolylineForCoordinates(coordianteSet)
+            mapview.addOverlay(polyline, level: .AboveRoads)
+            polylines.append(polyline)
         }
+        
+        let boundingMapRect = boundingMapRectForPolylines(polylines)
+        mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
     }
 }
 

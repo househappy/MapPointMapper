@@ -525,6 +525,16 @@
                                     <action selector="centerUSPressed:" target="x5f-ay-aNI" id="h85-Ib-uWx"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ox-d9-yu9">
+                                <rect key="frame" x="8" y="92" width="136" height="32"/>
+                                <buttonCell key="cell" type="push" title="Center all Lines" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zqM-sh-tiK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="centerAllLinesPressed:" target="x5f-ay-aNI" id="nSh-2R-ZsG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="LSh-zC-JDv" firstAttribute="centerX" secondItem="N5u-4y-0Q9" secondAttribute="centerX" id="1ut-jI-Uch"/>
@@ -548,11 +558,14 @@
                             <constraint firstItem="nOr-Ud-bqT" firstAttribute="centerX" secondItem="rgX-34-8xf" secondAttribute="centerX" id="ptT-cQ-7Fj"/>
                             <constraint firstItem="LSh-zC-JDv" firstAttribute="top" secondItem="zfK-eb-zSN" secondAttribute="bottom" constant="12" id="qv1-Rh-uQ4"/>
                             <constraint firstAttribute="trailing" secondItem="IDf-sq-Yq7" secondAttribute="trailing" id="rsb-I2-xv9"/>
+                            <constraint firstItem="9ox-d9-yu9" firstAttribute="centerX" secondItem="qSu-Jo-iuV" secondAttribute="centerX" id="sFL-bS-fFD"/>
                             <constraint firstItem="zfK-eb-zSN" firstAttribute="centerX" secondItem="LSh-zC-JDv" secondAttribute="centerX" id="wfE-f4-YtA"/>
+                            <constraint firstItem="qSu-Jo-iuV" firstAttribute="top" secondItem="9ox-d9-yu9" secondAttribute="bottom" constant="12" id="ze9-tN-E6r"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addLineFromTextButton" destination="mIA-fl-4xO" id="8P0-uJ-XUm"/>
+                        <outlet property="centerAllLinesButton" destination="9ox-d9-yu9" id="Qye-dk-5xJ"/>
                         <outlet property="centerUSButton" destination="qSu-Jo-iuV" id="Tw5-3E-fjv"/>
                         <outlet property="colorWell" destination="yty-w6-g2a" id="tPF-sr-nV1"/>
                         <outlet property="latlngLabel" destination="rgX-34-8xf" id="EaC-8f-icT"/>
