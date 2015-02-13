@@ -48,7 +48,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         if textfield.stringValue.isEmpty {
             return
         }
-        parseInput(textfield.stringValue as NSString)
+        renderInput(textfield.stringValue as NSString)
     }
     
     @IBAction func removeLastLinePressed(sender: NSButton) {
@@ -109,6 +109,8 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     override func keyUp(theEvent: NSEvent) {
         if theEvent.keyCode == 36 { // 36 is the return key apparently
             addLineFromTextPressed(self.addLineFromTextButton)
+            // clear previous text
+            textfield.stringValue = ""
         }
     }
     
@@ -166,10 +168,19 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
                 return
             }
             
-            parseInput(contents!)
+            renderInput(contents!)
         }
     } // end readFileAtURL
     
+    private func randomizeColorWell() {
+        colorWell.color = NSColor.randomColor()
+    }
+
+    private func renderInput(input: NSString) {
+        parseInput(input)
+        randomizeColorWell()
+    }
+
     private func parseInput(input: NSString) {
         
         let coordinates = Parser.parseString(input, longitudeFirst: parseLongitudeFirst)
@@ -180,7 +191,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
             mapview.addOverlay(polyline, level: .AboveRoads)
             polylines.append(polyline)
         }
-        
+
         let boundingMapRect = boundingMapRectForPolylines(polylines)
         mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
     }
