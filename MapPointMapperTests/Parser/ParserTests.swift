@@ -34,6 +34,10 @@ class ParserSpec: XCTestCase {
     XCTAssertFalse(parser.isProbablyGeoString(unknown), "'unknown' should not be a geospacial string")
   }
   
+  func testParserKnowsItsNotGeoSpacialEvenIfItsClose() {
+    XCTAssertFalse(parser.isProbablyGeoString("-122 45"), "'-122 45' should not be geospacial")
+  }
+  
   func testIsMultiItem() {
     XCTAssertTrue(parser.isMultiItem(multiPolygon), "'multipolygon' should be a multi item")
     XCTAssertTrue(parser.isMultiItem(multiLine), "'multiline' should be a multi item")

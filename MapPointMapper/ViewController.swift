@@ -167,8 +167,10 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
                 NSAlert(error: err)
                 return
             }
-            
-            renderInput(contents!)
+
+            if let content = contents {
+                renderInput(content)
+            }
         }
     } // end readFileAtURL
     
@@ -182,9 +184,9 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     }
 
     private func parseInput(input: NSString) {
-        
-        let coordinates = Parser.parseString(input, longitudeFirst: parseLongitudeFirst)
-        
+
+        let coordinates = Parser.parseString(input, longitudeFirst: parseLongitudeFirst).filter({!$0.isEmpty})
+
         var polylines = [MKOverlay]()
         for coordianteSet in coordinates {
             let polyline = createPolylineForCoordinates(coordianteSet)
@@ -192,8 +194,10 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
             polylines.append(polyline)
         }
 
-        let boundingMapRect = boundingMapRectForPolylines(polylines)
-        mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
+        if !polylines.isEmpty {
+            let boundingMapRect = boundingMapRectForPolylines(polylines)
+            mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
+        }
     }
 }
 
