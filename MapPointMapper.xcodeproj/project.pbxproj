@@ -16,6 +16,7 @@
 		547AAF8E1A1EDEAD00A0D174 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547AAF8D1A1EDEAD00A0D174 /* Parser.swift */; };
 		54B987061A895EF200D541F4 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B987051A895EF200D541F4 /* ParserTests.swift */; };
 		54B987081A896BF600D541F4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547AAF8D1A1EDEAD00A0D174 /* Parser.swift */; };
+		A03C25251A8E7DAB00FE23FE /* NSColorHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C25241A8E7DAB00FE23FE /* NSColorHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		547425081A1C1D3D00A8478C /* MapPointMapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MapPointMapper.entitlements; sourceTree = "<group>"; };
 		547AAF8D1A1EDEAD00A0D174 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Parser/Parser.swift; sourceTree = "<group>"; };
 		54B987051A895EF200D541F4 /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = ParserTests.swift; path = Parser/ParserTests.swift; sourceTree = "<group>"; tabWidth = 2; };
+		A03C25241A8E7DAB00FE23FE /* NSColorHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSColorHelpers.swift; path = Extensions/NSColorHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		547424E61A1C1CE800A8478C /* MapPointMapper */ = {
 			isa = PBXGroup;
 			children = (
+				A03C25211A8E7B1D00FE23FE /* Extensions */,
 				547AAF8C1A1EDE8000A0D174 /* Parser */,
 				547425081A1C1D3D00A8478C /* MapPointMapper.entitlements */,
 				547424E91A1C1CE800A8478C /* AppDelegate.swift */,
@@ -136,6 +139,14 @@
 				54B987051A895EF200D541F4 /* ParserTests.swift */,
 			);
 			name = Parser;
+			sourceTree = "<group>";
+		};
+		A03C25211A8E7B1D00FE23FE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A03C25241A8E7DAB00FE23FE /* NSColorHelpers.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +256,7 @@
 			files = (
 				547424EC1A1C1CE800A8478C /* ViewController.swift in Sources */,
 				547424EA1A1C1CE800A8478C /* AppDelegate.swift in Sources */,
+				A03C25251A8E7DAB00FE23FE /* NSColorHelpers.swift in Sources */,
 				547AAF8E1A1EDEAD00A0D174 /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
