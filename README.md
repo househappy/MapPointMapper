@@ -9,20 +9,22 @@ MapPointMapper
 
 ## Usage / Plotting Points
 
-
-
-## Installation
-
+![](assets/mappointmapper.gif)
 
 ## Known Issues
 
-- Parsing only supports [Well-known text](https://en.wikipedia.org/wiki/Well-known_text) format.
+- Parsing only supports [Well-known text][well-known-text] format.
 
 ## Change Log
 
-- 2015.02.11 - Add Center US Button - [theoretick](https://github.com/theoretick)
-- 2015.02.09 - Support [Well-known text](https://en.wikipedia.org/wiki/Well-known_text) formats - [dmiedema](https://github.com/dmiedema)
+- 2015.02.13 - Randomize the colorwell after adding a line to the map - [theoretick][theoretick]
+- 2015.02.13 - Center map to contain all polygons drawn & add button to center map around all lines on the map. - [theoretick][theoretick] & [dmiedema][dmiedema]
+- 2015.02.11 - Add Center US Button - [theoretick][theoretick]
+- 2015.02.09 - Support [Well-known text][well-known-text] formats - [dmiedema][dmiedema]
 
+[well-known-text]: https://en.wikipedia.org/wiki/Well-known_text
+[dmiedema]: https://github.com/dmiedema
+[theoretick]: https://github.com/theoretick
 
 ## License
 
@@ -47,3 +49,5 @@ MapPointMapper
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
+
+
