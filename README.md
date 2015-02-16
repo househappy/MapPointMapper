@@ -9,10 +9,7 @@ MapPointMapper
 
 ## Usage / Plotting Points
 
-
-
-## Installation
-
+![](assets/mappointmapper.gif)
 
 ## Known Issues
 
