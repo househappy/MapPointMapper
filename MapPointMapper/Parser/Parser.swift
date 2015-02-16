@@ -93,7 +93,7 @@ class Parser {
     /**
     Convert an array of strings into tuple pairs.
     
-    :note: the number of values passed in should probaly be even, since it creates pairs.
+    :note: the number of values passed in should probably be even, since it creates pairs.
 
     :param: array of `[NSString]` array to create tuples from
 
@@ -120,7 +120,7 @@ class Parser {
     /**
     :abstract: Naively format a `Well-Known Text` string into array of string values, where each string is a single value
     
-    :disucssion: This removes any lingering parens from the given string, breaks on `,` then breaks on ` ` while filtering out any empty strings.
+    :discussion: This removes any lingering parens from the given string, breaks on `,` then breaks on ` ` while filtering out any empty strings.
 
     :param: input String to format, assumed `Well-Known Text` format
 
@@ -157,7 +157,7 @@ class Parser {
     /**
     :abstract: Convert a given array of `(String, String)` tuples to array of `CLLocationCoordinate2D` values
     
-    :discussion: This attempts to parse the strings double values but does no safety checks if they can be parsed as `double`s.
+    :discussion: This attempts to parse the string's double values but does no safety checks if they can be parsed as `double`s.
 
     :param: pairs          array of `String` tuples to parse as `Double`s
     :param: longitudeFirst boolean flag if the first item in the tuple should be the longitude value

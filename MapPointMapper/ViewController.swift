@@ -141,7 +141,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     /**
     Get the bounding `MKMapRect` that contains all given `MKOverlay` objects
 
-    :warning: 
+    :warning: If no `MKOverlay` objects are included the resulting `MKMapRect` will be nonsensical and will results in a warning.
     
     :param: polylines array of `MKOverlay` objects.
 
