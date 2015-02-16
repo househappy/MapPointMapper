@@ -132,7 +132,7 @@ class Parser {
     output => "( 15 32 )"
     */
     internal func stripExtraneousCharacters(input: NSString) -> NSString {
-        let regex = NSRegularExpression(pattern: "\\D+\\s+\\((.*)\\)", options: .CaseInsensitive, error: nil)
+        let regex = NSRegularExpression(pattern: "\\w+\\s+\\((.*)\\)", options: .CaseInsensitive, error: nil)
         let match: AnyObject? = regex?.matchesInString(input, options: .ReportCompletion, range: NSMakeRange(0, input.length)).first
         let range = match?.rangeAtIndex(1)
         
@@ -143,7 +143,7 @@ class Parser {
     }
     
     internal func isProbablyGeoString(input: String) -> Bool {
-        if let geoString = input.rangeOfString("^\\D+", options: .RegularExpressionSearch) {
+        if let geoString = input.rangeOfString("^\\w+", options: .RegularExpressionSearch) {
             return true
         }
         return false
@@ -155,7 +155,7 @@ class Parser {
         }
         return false
     }
-    
+
     /**
     Determines if a the collection is space delimited or not
     

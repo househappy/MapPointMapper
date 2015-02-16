@@ -13,7 +13,7 @@ import MapKit
 let line         = "LINESTRING (30 10, 10 30, 40 40)"
 let polygon      = "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"
 let point        = "POINT (30 10)"
-let unknown      = "30 20, 45 40, 10 15"
+let unknown      = "-30 20, -45 40, -10 15"
 let multiPolygon = "MULTIPOLYGON (((30 20, 45 40, 10 40, 30 20)), ((15 5, 40 10, 10 20, 5 10, 15 5)))"
 let multiPoint   = "MULTIPOINT ((10 40), (40 30), (20 20), (30 10))"
 let multiLine    = "MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))"
