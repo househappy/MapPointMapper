@@ -11,10 +11,12 @@ import AppKit
 
 extension NSColor {
     class func randomColor() -> NSColor {
-        let red = CGFloat(arc4random() % 255) / 255
-        let green = CGFloat(arc4random() % 255) / 255
-        let blue = CGFloat(arc4random() % 255) / 255
+        // Change bias based on http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/
+        let golden_ratio_conjugate: CGFloat = 0.618033988749895
+        var hue = CGFloat(arc4random() % 255) / 255
+        hue += golden_ratio_conjugate
+        hue %= 1
 
-        return NSColor(red: red, green: green, blue: blue, alpha: 1.0)
+        return NSColor(hue: hue, saturation: 0.5, brightness: 0.95, alpha: 1.0)
     }
 }

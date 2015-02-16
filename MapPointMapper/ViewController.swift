@@ -49,6 +49,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
             return
         }
         renderInput(textfield.stringValue as NSString)
+        textfield.stringValue = ""
     }
     
     @IBAction func removeLastLinePressed(sender: NSButton) {
@@ -109,8 +110,6 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     override func keyUp(theEvent: NSEvent) {
         if theEvent.keyCode == 36 { // 36 is the return key apparently
             addLineFromTextPressed(self.addLineFromTextButton)
-            // clear previous text
-            textfield.stringValue = ""
         }
     }
     
