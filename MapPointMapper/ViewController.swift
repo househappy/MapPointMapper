@@ -114,6 +114,14 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     }
     
     // MARK: - Private
+
+    /**
+    Create an `MKOverlay` for a given array of `CLLocationCoordinate2D` instances
+
+    :param: mapPoints array of `CLLocationCoordinate2D` instances to convert
+
+    :returns: an MKOverlay created from array of `CLLocationCoordinate2D` instances
+    */
     private func createPolylineForCoordinates(mapPoints: [CLLocationCoordinate2D]) -> MKOverlay {
         let coordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(mapPoints.count)
         
@@ -129,7 +137,16 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         
         return polyline
     }
+
+    /**
+    Get the bounding `MKMapRect` that contains all given `MKOverlay` objects
+
+    :warning: If no `MKOverlay` objects are included the resulting `MKMapRect` will be nonsensical and will results in a warning.
     
+    :param: polylines array of `MKOverlay` objects.
+
+    :returns: an `MKMapRect` that contains all the given `MKOverlay` objects
+    */
     private func boundingMapRectForPolylines(polylines: [MKOverlay]) -> MKMapRect {
         var minX = Double.infinity
         var minY = Double.infinity
@@ -152,7 +169,12 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         
         return MKMapRect(origin: MKMapPoint(x: minX, y: minY), size: MKMapSize(width: mapWidth, height: mapHeight))
     }
-    
+
+    /**
+    Read a given file at a url
+
+    :param: passedURL `NSURL` to attempt to read
+    */
     private func readFileAtURL(passedURL: NSURL?) {
         if let url = passedURL {
             if !NSFileManager.defaultManager().isReadableFileAtPath(url.absoluteString!) {
@@ -172,7 +194,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
             }
         }
     } // end readFileAtURL
-    
+
     private func randomizeColorWell() {
         colorWell.color = NSColor.randomColor()
     }
@@ -182,6 +204,11 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         randomizeColorWell()
     }
 
+    /**
+    Parse the given input.
+
+    :param: input `NSString` to parse and draw on the map. If no string is given this is essentially a noop
+    */
     private func parseInput(input: NSString) {
 
         let coordinates = Parser.parseString(input, longitudeFirst: parseLongitudeFirst).filter({!$0.isEmpty})
