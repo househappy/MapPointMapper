@@ -11,7 +11,7 @@ import MapKit
 
 extension NSString {
     /**
-    Convienence so `isEmpty` can be performed on an `NSString` instance just as if it were a `String`
+    Convenience so `isEmpty` can be performed on an `NSString` instance just as if it were a `String`
     */
     var isEmpty: Bool {
         get { return self.length == 0 || self.isEqualToString("") }
