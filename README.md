@@ -19,6 +19,7 @@ MapPointMapper
 
 ## Change Log
 
+- 2015.02.17 - Added logo and gif - [dmiedema][dmiedema]
 - 2015.02.13 - Randomize the colorwell after adding a line to the map - [theoretick][theoretick]
 - 2015.02.13 - Center map to contain all polygons drawn & add button to center map around all lines on the map. - [theoretick][theoretick] & [dmiedema][dmiedema]
 - 2015.02.11 - Add Center US Button - [theoretick][theoretick]
