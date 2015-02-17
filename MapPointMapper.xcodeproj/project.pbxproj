@@ -73,7 +73,9 @@
 				547424F91A1C1CE800A8478C /* MapPointMapperTests */,
 				547424E51A1C1CE800A8478C /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		547424E51A1C1CE800A8478C /* Products */ = {
 			isa = PBXGroup;
