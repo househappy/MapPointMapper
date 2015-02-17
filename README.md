@@ -1,3 +1,5 @@
+![](assets/logo.png)
+
 MapPointMapper
 ==============
 
