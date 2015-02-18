@@ -7,7 +7,9 @@ MapPointMapper
 
 ## Requirements
 
-`MapPointMapper` requires  at least OS X 10.10 and Xcode 6.1
+`MapPointMapper` requires at least OS X 10.10 and Xcode 6.1
+
+The `swift1.2` branch requires OS X 10.10 and at least Xcode 6.3 Beta 1
 
 ## Usage / Plotting Points
 
