@@ -24,9 +24,9 @@ extension String {
   :returns: a newly stripped string instance.
   */
   func stringByStrippingLeadingAndTrailingWhiteSpace() -> String {
-    let mutable = self.mutableCopy() as NSMutableString
+    let mutable = self.mutableCopy() as! NSMutableString
     CFStringTrimWhitespace(mutable)
-    return mutable.copy() as String
+    return mutable.copy() as! String
   }
 }
 
@@ -69,14 +69,14 @@ class Parser {
   internal func parseInput(input: NSString) ->  [[CLLocationCoordinate2D]] {
     var array = [[NSString]]()
     
-    let line = input
+    let line = input as! String
 
     if isProbablyGeoString(line) {
       self.longitudeFirst = true
       var items = [NSString]()
       
       if isMultiItem(line) {
-        items = stripExtraneousCharacters(line).componentsSeparatedByString("),") as [NSString]
+        items = stripExtraneousCharacters(line).componentsSeparatedByString("),") as! [NSString]
       } else {
         items = [stripExtraneousCharacters(line)]
       }
@@ -149,8 +149,8 @@ class Parser {
   }
   
   private func splitLine(input: NSString, delimiter: NSString) -> (NSString, NSString) {
-    let array = input.componentsSeparatedByString(delimiter)
-    return (array.first! as NSString, array.last! as NSString)
+    let array = input.componentsSeparatedByString(delimiter as String)
+    return (array.first! as! NSString, array.last! as! NSString)
   }
   
   /**
@@ -196,7 +196,7 @@ class Parser {
   */
   internal func stripExtraneousCharacters(input: NSString) -> NSString {
     let regex = NSRegularExpression(pattern: "\\w+\\s+\\((.*)\\)", options: .CaseInsensitive, error: nil)
-    let match: AnyObject? = regex?.matchesInString(input, options: .ReportCompletion, range: NSMakeRange(0, input.length)).first
+    let match: AnyObject? = regex?.matchesInString(input as String, options: .ReportCompletion, range: NSMakeRange(0, input.length)).first
     let range = match?.rangeAtIndex(1)
     
     let loc = range?.location as Int!

@@ -52,7 +52,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   
   @IBAction func removeLastLinePressed(sender: NSButton) {
     if let overlay: AnyObject = mapview.overlays.last {
-      mapview.removeOverlay(overlay as MKOverlay)
+      mapview.removeOverlay(overlay as! MKOverlay)
     }
   }
   
@@ -91,7 +91,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   }
 
   @IBAction func centerAllLinesPressed(sender: NSButton) {
-    let polylines = mapview.overlays as [MKOverlay]
+    let polylines = mapview.overlays as! [MKOverlay]
     let boundingMapRect = boundingMapRectForPolylines(polylines)
     mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
   }
