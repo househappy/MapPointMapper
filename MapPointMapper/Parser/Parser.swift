@@ -35,7 +35,7 @@ class Parser {
   /**
   Parse a given string of Lat/Lng values to return a collection of `CLLocationCoordinate2D` arrays.
 
-  :note: The preferred way/format of the input string is `Well-Known Text` as the parser supports that for multipolygons and such
+  - note: The preferred way/format of the input string is `Well-Known Text` as the parser supports that for multipolygons and such
 
   - parameter input:          String to parse
   - parameter longitudeFirst: Only used if it is determined to not be `Well-Known Text` format.
@@ -60,7 +60,7 @@ class Parser {
   /**
   Parse input string into a collection of `CLLocationCoordinate2D` arrays that can be drawn on a map
 
-  :note: This method supports (and really works best with/prefers) `Well-Known Text` format
+  - note: This method supports (and really works best with/prefers) `Well-Known Text` format
 
   - parameter input: `NSString` to parse
 
@@ -92,7 +92,7 @@ class Parser {
   /**
   Convert an array of strings into tuple pairs.
   
-  :note: the number of values passed in should probably be even, since it creates pairs.
+  - note: the number of values passed in should probably be even, since it creates pairs.
 
   - parameter array: of `[NSString]` array to create tuples from
 
@@ -118,9 +118,9 @@ class Parser {
   }
 
   /**
-  :abstract: Naively format a `Well-Known Text` string into array of string values, where each string is a single value
+  _abstract_: Naively format a `Well-Known Text` string into array of string values, where each string is a single value
   
-  :discussion: This removes any lingering parens from the given string, breaks on `,` then breaks on ` ` while filtering out any empty strings.
+  _discussion_: This removes any lingering parens from the given string, breaks on `,` then breaks on ` ` while filtering out any empty strings.
 
   - parameter input: String to format, assumed `Well-Known Text` format
 
@@ -185,12 +185,14 @@ class Parser {
   Removes any text before lat long points as well as two outer sets of parens.
   
   Example:
+  ```
   input  => "POLYGON(( 15 32 ))"
   output => "15 32"
 
   input  => "MULTIPOLYGON((( 15 32 )))"
   output => "( 15 32 )"
-
+  ```
+  
   - parameter input: NSString to strip extraneous characters from
 
   - returns: stripped string instance
@@ -212,9 +214,9 @@ class Parser {
   }
 
   /**
-  :abstract: Attempt to determine if a given string is in `Well-Known Text` format (GeoString as its referred to internally)
+  _abstract_: Attempt to determine if a given string is in `Well-Known Text` format (GeoString as its referred to internally)
 
-  :discussion: This strips any leading & trailing white space before checking for the existance of word characters at the start of the string.
+  _discussion_: This strips any leading & trailing white space before checking for the existance of word characters at the start of the string.
 
   - parameter input: String to attempt determine if is in `Well-Known Text` format
 
@@ -245,7 +247,7 @@ class Parser {
   /**
   Determines if a the collection is space delimited or not
   
-  :note: This function should only be passed a single entry or else it will probably have incorrect results
+  - note: This function should only be passed a single entry or else it will probably have incorrect results
   
   - parameter input: a single entry from the collection as a string
   
