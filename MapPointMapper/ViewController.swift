@@ -91,19 +91,20 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   }
 
   @IBAction func centerAllLinesPressed(sender: NSButton) {
-    let polylines = mapview.overlays as! [MKOverlay]
+    let polylines = mapview.overlays as [MKOverlay]
     let boundingMapRect = boundingMapRectForPolylines(polylines)
     mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
   }
   
   // MARK: MKMapDelegate
-  func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+  func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = MKPolylineRenderer(overlay: overlay)
     renderer.alpha = 1.0
     renderer.lineWidth = 4.0
     renderer.strokeColor = colorWell.color
     return renderer
   }
+  
   // MARK: NSTextFieldDelegate
   override func keyUp(theEvent: NSEvent) {
     if theEvent.keyCode == 36 { // 36 is the return key apparently
@@ -174,22 +175,19 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   :param: passedURL `NSURL` to attempt to read
   */
   private func readFileAtURL(passedURL: NSURL?) {
-    if let url = passedURL {
-      if !NSFileManager.defaultManager().isReadableFileAtPath(url.absoluteString!) {
-        NSAlert(error: NSError(domain: "com.dmiedema.MapPointMapper", code: -42, userInfo: [NSLocalizedDescriptionKey: "File is unreadable at \(url.absoluteString)"]))
-      }
-      
-      var error: NSError?
-      let contents = NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding, error: &error)
-      
-      if let err = error {
-        NSAlert(error: err)
-        return
-      }
-
-      if let content = contents {
-        renderInput(content)
-      }
+    guard let url = passedURL else { return }
+    
+    if !NSFileManager.defaultManager().isReadableFileAtPath(url.absoluteString) {
+      NSAlert(error: NSError(domain: "com.dmiedema.MapPointMapper", code: -42, userInfo: [NSLocalizedDescriptionKey: "File is unreadable at \(url.absoluteString)"]))
+    }
+    
+    let contents: String?
+    do {
+      contents = try NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding) as String
+      renderInput(contents!)
+    } catch {
+      NSAlert(error: error as NSError)
+      contents = nil
     }
   } // end readFileAtURL
 
