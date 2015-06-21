@@ -224,7 +224,7 @@ class Parser {
   */
   internal func isProbablyGeoString(input: String) -> Bool {
     let stripped = input.stringByStrippingLeadingAndTrailingWhiteSpace()
-    if let _ = stripped.rangeOfString("^\\w+", options: .RegularExpressionSearch) {
+    if stripped.rangeOfString("^\\w+", options: .RegularExpressionSearch) != nil {
       return true
     }
     return false
@@ -238,7 +238,7 @@ class Parser {
   - returns: `true` if the string starts with `MULTI`. `false` otherwise
   */
   internal func isMultiItem(input: String) -> Bool {
-    if let _ = input.rangeOfString("MULTI", options: .RegularExpressionSearch) {
+    if input.rangeOfString("MULTI", options: .RegularExpressionSearch) != nil {
       return true
     }
     return false
