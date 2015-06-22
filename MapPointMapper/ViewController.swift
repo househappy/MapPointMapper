@@ -24,7 +24,8 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   @IBOutlet weak var mapview: MKMapView!
   @IBOutlet weak var textfield: NSTextField!
   @IBOutlet weak var latlngLabel: NSTextField!
-  
+  @IBOutlet weak var searchfield: NSTextField!
+
   var parseLongitudeFirst = false
   // MARK: - Methods
   // MARK: View life cycle
@@ -32,6 +33,9 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     super.viewDidLoad()
     mapview.delegate = self
     textfield.delegate = self
+    
+    //    NSNotificationCenter.defaultCenter().addObserver(searchfield, selector: "method:resignFirstResponder", name: "canHazEnter", object: nil)
+    //  NSNotificationCenter.defaultCenter().addObserver(self, selector: “method:”, object: nil)
   }
 
   // MARK: Actions
@@ -107,10 +111,54 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   // MARK: NSTextFieldDelegate
   override func keyUp(theEvent: NSEvent) {
     if theEvent.keyCode == 36 { // 36 is the return key apparently
+      println("boop")
       addLineFromTextPressed(self.addLineFromTextButton)
     }
   }
   
+  @IBAction func searchForLocation(sender: NSButton) {
+    if searchfield.stringValue.isEmpty { return }
+    renderLocationSearch(searchfield.stringValue as NSString)
+    searchfield.stringValue = ""
+  }
+
+  
+  private func renderLocationSearch(input: NSString) {
+    let geocoder = CLGeocoder()
+    geocoder.geocodeAddressString(input as String) {
+      if let placemarks = $0 {
+        let placemark = placemarks.first as! CLPlacemark
+
+        var region = MKCoordinateRegion()
+        region.center.latitude = placemark.region.center.latitude
+        region.center.longitude = placemark.region.center.longitude
+
+        region.span = MKCoordinateSpan(latitudeDelta: 0.8, longitudeDelta: 0.8)
+        self.mapview.setRegion(region, animated: true)
+      } else {
+        println($1)
+      }
+    }
+//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+//    [geocoder geocodeAddressString:theSearchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
+//    //Error checking
+//    
+//    CLPlacemark *placemark = [placemarks objectAtIndex:0];
+//    MKCoordinateRegion region;
+//    region.center.latitude = placemark.region.center.latitude;
+//    region.center.longitude = placemark.region.center.longitude;
+//    MKCoordinateSpan span;
+//    double radius = placemark.region.radius / 1000; // convert to km
+//    
+//    NSLog(@"[searchBarSearchButtonClicked] Radius is %f", radius);
+//    span.latitudeDelta = radius / 112.0;
+//    
+//    region.span = span;
+//    
+//    [theMapView setRegion:region animated:YES];
+  }
+  
+
   // MARK: - Private
 
   /**

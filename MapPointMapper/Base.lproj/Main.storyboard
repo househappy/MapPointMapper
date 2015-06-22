@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
-        <plugIn identifier="com.apple.MapKitIBPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="7706"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -535,6 +535,24 @@
                                     <action selector="centerAllLinesPressed:" target="x5f-ay-aNI" id="nSh-2R-ZsG"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qR9-9Q-ru9">
+                                <rect key="frame" x="6" y="220" width="146" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="uW2-Ss-NS1">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gKa-Uf-GRA">
+                                <rect key="frame" x="8" y="184" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="Search Location" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dVT-sw-niD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="searchForLocation:" target="x5f-ay-aNI" id="omr-aq-fYb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="LSh-zC-JDv" firstAttribute="centerX" secondItem="N5u-4y-0Q9" secondAttribute="centerX" id="1ut-jI-Uch"/>
@@ -573,6 +591,7 @@
                         <outlet property="mapview" destination="IDf-sq-Yq7" id="YPq-jQ-DYM"/>
                         <outlet property="removeAllLinesButton" destination="N5u-4y-0Q9" id="EDX-b6-NPh"/>
                         <outlet property="removeLastLineButton" destination="LSh-zC-JDv" id="8Cs-UX-5mQ"/>
+                        <outlet property="searchfield" destination="qR9-9Q-ru9" id="b6R-37-UWl"/>
                         <outlet property="switchLatLngButton" destination="nOr-Ud-bqT" id="b4r-5W-2J2"/>
                         <outlet property="textfield" destination="ZzA-3K-qLW" id="4P3-HM-weB"/>
                     </connections>
