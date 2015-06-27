@@ -178,14 +178,14 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     guard let url = passedURL else { return }
     
     if !NSFileManager.defaultManager().isReadableFileAtPath(url.absoluteString) {
-      NSAlert(error: NSError(domain: "com.dmiedema.MapPointMapper", code: -42, userInfo: [NSLocalizedDescriptionKey: "File is unreadable at \(url.absoluteString)"]))
+       NSAlert(error: NSError(domain: "com.dmiedema.MapPointMapper", code: -42, userInfo: [NSLocalizedDescriptionKey: "File is unreadable at \(url.absoluteString)"])).runModal()
     }
     
     do {
       let contents = try NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding) as String
       renderInput(contents)
     } catch {
-      NSAlert(error: error as NSError)
+      NSAlert(error: error as NSError).runModal()
     }
   } // end readFileAtURL
 
