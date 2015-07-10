@@ -117,7 +117,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   /**
   Create an `MKOverlay` for a given array of `CLLocationCoordinate2D` instances
 
-  - parameter mapPoints array of `CLLocationCoordinate2D` instances to convert
+  - parameter mapPoints: array of `CLLocationCoordinate2D` instances to convert
 
   - returns: an MKOverlay created from array of `CLLocationCoordinate2D` instances
   */
@@ -142,7 +142,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
 
   - warning: If no `MKOverlay` objects are included the resulting `MKMapRect` will be nonsensical and will results in a warning.
   
-  - parameter polylines array of `MKOverlay` objects.
+  - parameter polylines: array of `MKOverlay` objects.
 
   - returns: an `MKMapRect` that contains all the given `MKOverlay` objects
   */
@@ -172,7 +172,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   /**
   Read a given file at a url
 
-  - parameter passedURL `NSURL` to attempt to read
+  - parameter passedURL: `NSURL` to attempt to read
   */
   private func readFileAtURL(passedURL: NSURL?) {
     guard let url = passedURL else { return }
@@ -201,7 +201,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   /**
   Parse the given input.
 
-  - parameter input `NSString` to parse and draw on the map. If no string is given this is essentially a noop
+  - parameter input: `NSString` to parse and draw on the map. If no string is given this is essentially a noop
   */
   private func parseInput(input: NSString) {
 
