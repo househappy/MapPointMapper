@@ -10,13 +10,14 @@ import Cocoa
 import XCTest
 import MapKit
 
-let line         = "LINESTRING (30 10, 10 30, 40 40)"
-let polygon      = "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"
-let point        = "POINT (30 10)"
-let unknown      = "-30 20, -45 40, -10 15"
-let multiPolygon = "MULTIPOLYGON (((30 20, 45 40, 10 40, 30 20)), ((15 5, 40 10, 10 20, 5 10, 15 5)))"
-let multiPoint   = "MULTIPOINT ((10 40), (40 30), (20 20), (30 10))"
-let multiLine    = "MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))"
+let line            = "LINESTRING (30 10, 10 30, 40 40)"
+let polygon         = "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"
+let point           = "POINT (30 10)"
+let point_alternate = "POINT(30 10)"
+let unknown         = "-30 20, -45 40, -10 15"
+let multiPolygon    = "MULTIPOLYGON (((30 20, 45 40, 10 40, 30 20)), ((15 5, 40 10, 10 20, 5 10, 15 5)))"
+let multiPoint      = "MULTIPOINT ((10 40), (40 30), (20 20), (30 10))"
+let multiLine       = "MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))"
 
 class ParserSpec: XCTestCase {
   var parser: Parser!
@@ -55,7 +56,21 @@ class ParserSpec: XCTestCase {
     XCTAssertEqual(first.first!, "30", "First item should be '30', was \(first.first!)")
     XCTAssertEqual(first.last!, "10", "Last item should be '10', was \(first.last!)")
   }
-  
+
+  func testHandlesAlternativeWKTFormats() {
+    let formatted_first = [parser.stripExtraneousCharacters(point)].map({
+      self.parser.formatStandardGeoDataString($0)
+    })
+    let formatted_second = [parser.stripExtraneousCharacters(point_alternate)].map({
+      self.parser.formatStandardGeoDataString($0)
+    })
+
+    let first = formatted_first.first!
+    let second = formatted_second.first!
+    XCTAssertEqual(first.first!, second.first!, "First item should equal second, first was \(first.first!), second was \(second.first!)")
+    XCTAssertEqual(first.last!, second.last!, "First item should equal second, first was \(first.last!), second was \(second.last!)")
+  }
+
   func testParsingInput() {
     let parsedLine = parser.parseInput(line)
     
