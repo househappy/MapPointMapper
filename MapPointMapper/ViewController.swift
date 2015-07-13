@@ -33,7 +33,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     super.viewDidLoad()
     mapview.delegate = self
     textfield.delegate = self
-    
+
     //    NSNotificationCenter.defaultCenter().addObserver(searchfield, selector: "method:resignFirstResponder", name: "canHazEnter", object: nil)
     //  NSNotificationCenter.defaultCenter().addObserver(self, selector: “method:”, object: nil)
   }
@@ -111,7 +111,6 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   // MARK: NSTextFieldDelegate
   override func keyUp(theEvent: NSEvent) {
     if theEvent.keyCode == 36 { // 36 is the return key apparently
-      println("boop")
       addLineFromTextPressed(self.addLineFromTextButton)
     }
   }
@@ -122,7 +121,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     searchfield.stringValue = ""
   }
 
-  
+
   private func renderLocationSearch(input: NSString) {
     let geocoder = CLGeocoder()
     geocoder.geocodeAddressString(input as String) {
@@ -139,23 +138,6 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         println($1)
       }
     }
-//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-//    [geocoder geocodeAddressString:theSearchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
-//    //Error checking
-//    
-//    CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//    MKCoordinateRegion region;
-//    region.center.latitude = placemark.region.center.latitude;
-//    region.center.longitude = placemark.region.center.longitude;
-//    MKCoordinateSpan span;
-//    double radius = placemark.region.radius / 1000; // convert to km
-//    
-//    NSLog(@"[searchBarSearchButtonClicked] Radius is %f", radius);
-//    span.latitudeDelta = radius / 112.0;
-//    
-//    region.span = span;
-//    
-//    [theMapView setRegion:region animated:YES];
   }
   
 
@@ -250,6 +232,23 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     randomizeColorWell()
   }
 
+  private func determineScaleForRuler(visibleRect: MKMapRect) -> Double {
+
+    let x1 = MKMapRectGetMinX(visibleRect)
+    let y1 = MKMapRectGetMinY(visibleRect)
+
+    let x2 = MKMapRectGetMaxX(visibleRect)
+    let y2 = MKMapRectGetMinY(visibleRect)
+
+    let swPoint = MKMapPointMake(x1, y1)
+    let sePoint = MKMapPointMake(x2, y2)
+
+    let distance = MKMetersBetweenMapPoints(swPoint, sePoint)
+    let distanceInMiles = Double(distance) * 0.000621371
+
+    return distanceInMiles
+  }
+
   /**
   Parse the given input.
 
@@ -260,14 +259,18 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     let coordinates = Parser.parseString(input, longitudeFirst: parseLongitudeFirst).filter({!$0.isEmpty})
 
     var polylines = [MKOverlay]()
-    for coordianteSet in coordinates {
-      let polyline = createPolylineForCoordinates(coordianteSet)
+    for coordinateSet in coordinates {
+      let polyline = createPolylineForCoordinates(coordinateSet)
       mapview.addOverlay(polyline, level: .AboveRoads)
       polylines.append(polyline)
     }
 
     if !polylines.isEmpty {
       let boundingMapRect = boundingMapRectForPolylines(polylines)
+
+      let scale = determineScaleForRuler(boundingMapRect)
+      println(String(format: "Scale is %.2f miles", scale))
+
       mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
     }
   }

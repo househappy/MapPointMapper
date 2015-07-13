@@ -462,7 +462,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <mapView mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IDf-sq-Yq7">
+                            <mapView mapType="standard" pitchEnabled="NO" showsBuildings="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IDf-sq-Yq7">
                                 <rect key="frame" x="160" y="33" width="440" height="447"/>
                             </mapView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N5u-4y-0Q9">
