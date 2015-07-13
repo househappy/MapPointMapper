@@ -195,10 +195,10 @@ class Parser {
   :returns: stripped string instance
   */
   internal func stripExtraneousCharacters(input: NSString) -> NSString {
-    let regex = NSRegularExpression(pattern: "\\w+\\s+\\((.*)\\)", options: .CaseInsensitive, error: nil)
+    let regex = NSRegularExpression(pattern: "\\w+\\s*\\((.*)\\)", options: .CaseInsensitive, error: nil)
     let match: AnyObject? = regex?.matchesInString(input as String, options: .ReportCompletion, range: NSMakeRange(0, input.length)).first
     let range = match?.rangeAtIndex(1)
-    
+
     let loc = range?.location as Int!
     let len = range?.length as Int!
     
