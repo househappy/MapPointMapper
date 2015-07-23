@@ -3,7 +3,7 @@
 MapPointMapper
 ==============
 
-`MapPointMapper` is an OS X application designed to plot latitude and longitude coordinates for ease of visualization of geospacial data.
+`MapPointMapper` is an OS X application designed to plot [WKT data](https://en.wikipedia.org/wiki/Well-known_text) and latitude and longitude coordinates for ease of visualization of geospacial data.
 
 ## Requirements
 
