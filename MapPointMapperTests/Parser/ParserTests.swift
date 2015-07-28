@@ -105,8 +105,8 @@ class ParserSpec: XCTestCase {
     let coordinatesArray = converted.map({self.parser.convertToCoordinates($0, longitudeFirst: true)})
     
     if let coordinates = coordinatesArray.first {
-      XCTAssertEqualWithAccuracy(coordinates.first!.latitude, 10.0, 0.001, "latitude should be 10, was \(coordinates.first!.latitude)")
-      XCTAssertEqualWithAccuracy(coordinates.first!.longitude, 30.0, 0.001, "longitude should be 30, was \(coordinates.first!.longitude)")
+      XCTAssertEqualWithAccuracy(coordinates.first!.latitude, 10.0, accuracy: 0.001, "latitude should be 10, was \(coordinates.first!.latitude)")
+      XCTAssertEqualWithAccuracy(coordinates.first!.longitude, 30.0, accuracy: 0.001, "longitude should be 30, was \(coordinates.first!.longitude)")
     } else {
       XCTFail("Unable to take first from coordinatesArray")
     }

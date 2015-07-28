@@ -91,19 +91,20 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   }
 
   @IBAction func centerAllLinesPressed(sender: NSButton) {
-    let polylines = mapview.overlays as! [MKOverlay]
+    let polylines = mapview.overlays as [MKOverlay]
     let boundingMapRect = boundingMapRectForPolylines(polylines)
     mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
   }
   
   // MARK: MKMapDelegate
-  func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+  func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = MKPolylineRenderer(overlay: overlay)
     renderer.alpha = 1.0
     renderer.lineWidth = 4.0
     renderer.strokeColor = colorWell.color
     return renderer
   }
+  
   // MARK: NSTextFieldDelegate
   override func keyUp(theEvent: NSEvent) {
     if theEvent.keyCode == 36 { // 36 is the return key apparently
@@ -116,9 +117,9 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   /**
   Create an `MKOverlay` for a given array of `CLLocationCoordinate2D` instances
 
-  :param: mapPoints array of `CLLocationCoordinate2D` instances to convert
+  - parameter mapPoints: array of `CLLocationCoordinate2D` instances to convert
 
-  :returns: an MKOverlay created from array of `CLLocationCoordinate2D` instances
+  - returns: an MKOverlay created from array of `CLLocationCoordinate2D` instances
   */
   private func createPolylineForCoordinates(mapPoints: [CLLocationCoordinate2D]) -> MKOverlay {
     let coordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(mapPoints.count)
@@ -139,11 +140,11 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   /**
   Get the bounding `MKMapRect` that contains all given `MKOverlay` objects
 
-  :warning: If no `MKOverlay` objects are included the resulting `MKMapRect` will be nonsensical and will results in a warning.
+  - warning: If no `MKOverlay` objects are included the resulting `MKMapRect` will be nonsensical and will results in a warning.
   
-  :param: polylines array of `MKOverlay` objects.
+  - parameter polylines: array of `MKOverlay` objects.
 
-  :returns: an `MKMapRect` that contains all the given `MKOverlay` objects
+  - returns: an `MKMapRect` that contains all the given `MKOverlay` objects
   */
   private func boundingMapRectForPolylines(polylines: [MKOverlay]) -> MKMapRect {
     var minX = Double.infinity
@@ -171,25 +172,20 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   /**
   Read a given file at a url
 
-  :param: passedURL `NSURL` to attempt to read
+  - parameter passedURL: `NSURL` to attempt to read
   */
   private func readFileAtURL(passedURL: NSURL?) {
-    if let url = passedURL {
-      if !NSFileManager.defaultManager().isReadableFileAtPath(url.absoluteString!) {
-        NSAlert(error: NSError(domain: "com.dmiedema.MapPointMapper", code: -42, userInfo: [NSLocalizedDescriptionKey: "File is unreadable at \(url.absoluteString)"]))
-      }
-      
-      var error: NSError?
-      let contents = NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding, error: &error)
-      
-      if let err = error {
-        NSAlert(error: err)
-        return
-      }
-
-      if let content = contents {
-        renderInput(content)
-      }
+    guard let url = passedURL else { return }
+    
+    if !NSFileManager.defaultManager().isReadableFileAtPath(url.absoluteString) {
+       NSAlert(error: NSError(domain: "com.dmiedema.MapPointMapper", code: -42, userInfo: [NSLocalizedDescriptionKey: "File is unreadable at \(url.absoluteString)"])).runModal()
+    }
+    
+    do {
+      let contents = try NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding) as String
+      renderInput(contents)
+    } catch {
+      NSAlert(error: error as NSError).runModal()
     }
   } // end readFileAtURL
 
@@ -205,7 +201,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   /**
   Parse the given input.
 
-  :param: input `NSString` to parse and draw on the map. If no string is given this is essentially a noop
+  - parameter input: `NSString` to parse and draw on the map. If no string is given this is essentially a noop
   */
   private func parseInput(input: NSString) {
 
