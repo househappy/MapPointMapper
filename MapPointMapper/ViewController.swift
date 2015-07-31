@@ -210,6 +210,10 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   Parse the given input.
 
   - parameter input: `NSString` to parse and draw on the map. If no string is given this is essentially a noop
+
+  - warning: If invalid WKT input string, will result in `NSAlert()` and false return
+
+  - returns: `Bool` on render success
   */
   private func parseInput(input: NSString) -> Bool {
     var coordinates = [[CLLocationCoordinate2D]()]
@@ -227,8 +231,8 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     }
 
     var polylines = [MKOverlay]()
-    for coordianteSet in coordinates {
-      let polyline = createPolylineForCoordinates(coordianteSet)
+    for coordinateSet in coordinates {
+      let polyline = createPolylineForCoordinates(coordinateSet)
       mapview.addOverlay(polyline, level: .AboveRoads)
       polylines.append(polyline)
     }

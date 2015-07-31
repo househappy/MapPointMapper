@@ -50,11 +50,12 @@ class Parser {
   */
   class func parseString(input: NSString, longitudeFirst: Bool) throws -> [[CLLocationCoordinate2D]] {
     let coordinate_set = Parser(longitudeFirst: longitudeFirst).parseInput(input)
-    if coordinate_set.count == 0 {
+
+    guard coordinate_set.count > 0 else {
       throw ParseError.InvalidWktString(description: "Unable to parse input string")
-    } else {
-      return coordinate_set
     }
+
+    return coordinate_set
   }
 
   var longitudeFirst = false
@@ -221,11 +222,9 @@ class Parser {
     let loc = range?.location as Int!
     let len = range?.length as Int!
     
-    if (loc != nil && len != nil) {
-      return input.substringWithRange(NSRange(location: loc, length: len)) as NSString
-    } else {
-      return ""
-    }
+    guard loc != nil && len != nil else { return "" }
+
+    return input.substringWithRange(NSRange(location: loc, length: len)) as NSString
   }
 
   /**
