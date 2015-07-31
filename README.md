@@ -21,6 +21,8 @@ The `swift1.2` branch requires OS X 10.10 and at least Xcode 6.3 Beta 1
 
 ## Change Log
 
+- 2015.07.31 - Add error modal for invalid input strings - [theoretick][theoretick]
+- 2015.07.13 - More robust handling of varied WKT formats - [theoretick][theoretick]
 - 2015.02.17 - Added logo and gif - [dmiedema][dmiedema]
 - 2015.02.13 - Randomize the colorwell after adding a line to the map - [theoretick][theoretick]
 - 2015.02.13 - Center map to contain all polygons drawn & add button to center map around all lines on the map. - [theoretick][theoretick] & [dmiedema][dmiedema]
