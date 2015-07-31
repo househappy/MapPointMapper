@@ -32,6 +32,10 @@ extension String {
   }
 }
 
+enum ParseError : ErrorType {
+  case InvalidWktString(description: String)
+}
+
 class Parser {
   // MARK: - Public
   /**
@@ -44,10 +48,15 @@ class Parser {
 
   - returns: An array of `CLLocationCoordinate2D` arrays representing the parsed areas/lines
   */
-  class func parseString(input: NSString, longitudeFirst: Bool) -> [[CLLocationCoordinate2D]] {
-    return Parser(longitudeFirst: longitudeFirst).parseInput(input)
+  class func parseString(input: NSString, longitudeFirst: Bool) throws -> [[CLLocationCoordinate2D]] {
+    let coordinate_set = Parser(longitudeFirst: longitudeFirst).parseInput(input)
+    if coordinate_set.count == 0 {
+      throw ParseError.InvalidWktString(description: "Unable to parse input string")
+    } else {
+      return coordinate_set
+    }
   }
-  
+
   var longitudeFirst = false
   convenience init(longitudeFirst: Bool) {
     self.init()
@@ -212,7 +221,11 @@ class Parser {
     let loc = range?.location as Int!
     let len = range?.length as Int!
     
-    return input.substringWithRange(NSRange(location: loc, length: len)) as NSString
+    if (loc != nil && len != nil) {
+      return input.substringWithRange(NSRange(location: loc, length: len)) as NSString
+    } else {
+      return ""
+    }
   }
 
   /**

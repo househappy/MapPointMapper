@@ -46,8 +46,12 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
   
   @IBAction func addLineFromTextPressed(sender: NSButton) {
     if textfield.stringValue.isEmpty { return }
-    renderInput(textfield.stringValue as NSString)
-    textfield.stringValue = ""
+    if renderInput(textfield.stringValue as NSString) {
+      textfield.stringValue = ""
+    } else {
+      // TODO: dont wipe out string field and stop event from propagating!
+      textfield.stringValue = ""
+    }
   }
   
   @IBAction func removeLastLinePressed(sender: NSButton) {
@@ -193,9 +197,13 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     colorWell.color = NSColor.randomColor()
   }
 
-  private func renderInput(input: NSString) {
-    parseInput(input)
-    randomizeColorWell()
+  private func renderInput(input: NSString) -> Bool {
+    if parseInput(input) {
+      randomizeColorWell()
+      return true
+    } else {
+      return false
+    }
   }
 
   /**
@@ -203,9 +211,20 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
 
   - parameter input: `NSString` to parse and draw on the map. If no string is given this is essentially a noop
   */
-  private func parseInput(input: NSString) {
+  private func parseInput(input: NSString) -> Bool {
+    var coordinates = [[CLLocationCoordinate2D]()]
 
-    let coordinates = Parser.parseString(input, longitudeFirst: parseLongitudeFirst).filter({!$0.isEmpty})
+    do {
+      coordinates = try Parser.parseString(input, longitudeFirst: parseLongitudeFirst).filter({!$0.isEmpty})
+    } catch ParseError.InvalidWktString {
+      let error_msg = NSError(domain:String(), code:-1, userInfo:
+        [NSLocalizedDescriptionKey: "Invalid WKT input string, unable to parse"])
+      NSAlert(error: error_msg).runModal()
+      return false
+    } catch {
+      NSAlert(error: error as NSError).runModal()
+      return false
+    }
 
     var polylines = [MKOverlay]()
     for coordianteSet in coordinates {
@@ -218,6 +237,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
       let boundingMapRect = boundingMapRectForPolylines(polylines)
       mapview.setVisibleMapRect(boundingMapRect, edgePadding: NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
     }
+    return true
   }
 }
 
