@@ -70,6 +70,15 @@ class ParserSpec: XCTestCase {
     XCTAssertEqual(first.first!, second.first!, "First item should equal second, first was \(first.first!), second was \(second.first!)")
     XCTAssertEqual(first.last!, second.last!, "First item should equal second, first was \(first.last!), second was \(second.last!)")
   }
+  
+  func testParsingInvalidInputString() {
+    let inputString = "POLYGON (( herp derp dee derp"
+    do {
+      try Parser.parseString(inputString, longitudeFirst: false)
+    } catch {
+      XCTAssertTrue(error is ErrorType)
+    }
+  }
 
   func testParsingInput() {
     let parsedLine = parser.parseInput(line)
