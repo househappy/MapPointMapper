@@ -151,7 +151,7 @@ class Parser {
     var filtered = [NSString]()
     
     for pair in pairs {
-      pair.componentsSeparatedByString(" ").filter({!$0.isEmpty}).map({filtered.append($0)})
+      pair.componentsSeparatedByString(" ").filter({!$0.isEmpty}).forEach({filtered.append($0)})
     }
     
     return filtered.filter({!$0.isEmpty})

@@ -123,7 +123,7 @@ class ParserSpec: XCTestCase {
   
   func testPerformanceOfParsing() {
     self.measureBlock() {
-      let result = self.parser.parseInput(multiPolygon)
+      self.parser.parseInput(multiPolygon)
     }
   }
   
