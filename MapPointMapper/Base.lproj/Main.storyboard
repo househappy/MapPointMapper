@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
-        <plugIn identifier="com.apple.MapKitIBPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="9532"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -434,7 +434,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zfK-eb-zSN">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zfK-eb-zSN">
                                 <rect key="frame" x="27" y="432" width="97" height="32"/>
                                 <buttonCell key="cell" type="push" title="Load File" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wty-2s-r1s">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -444,7 +444,7 @@
                                     <action selector="loadFileButtonPressed:" target="x5f-ay-aNI" id="Fyj-wA-DMV"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mIA-fl-4xO">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mIA-fl-4xO">
                                 <rect key="frame" x="426" y="-1" width="160" height="32"/>
                                 <buttonCell key="cell" type="push" title="Add Line From Text" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nIS-0A-n26">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -454,18 +454,21 @@
                                     <action selector="addLineFromTextPressed:" target="x5f-ay-aNI" id="s7R-Z9-LHc"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZzA-3K-qLW">
+                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZzA-3K-qLW">
                                 <rect key="frame" x="160" y="7" width="264" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Ksf-cz-pNz">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="MULTIPOLYGON (((-155.247897 20.059808, -155.245501 20.058643, " drawsBackground="YES" id="Ksf-cz-pNz">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="addLineFromTextPressed:" target="x5f-ay-aNI" id="L4J-IU-YDl"/>
+                                </connections>
                             </textField>
-                            <mapView mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IDf-sq-Yq7">
+                            <mapView misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IDf-sq-Yq7">
                                 <rect key="frame" x="160" y="33" width="440" height="447"/>
                             </mapView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N5u-4y-0Q9">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N5u-4y-0Q9">
                                 <rect key="frame" x="2" y="366" width="147" height="32"/>
                                 <buttonCell key="cell" type="push" title="Remove All Lines" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ReJ-rw-vMY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -475,7 +478,7 @@
                                     <action selector="removeAllLinesPressed:" target="x5f-ay-aNI" id="uSX-am-hZX"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LSh-zC-JDv">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LSh-zC-JDv">
                                 <rect key="frame" x="0.0" y="399" width="151" height="32"/>
                                 <buttonCell key="cell" type="push" title="Remove Last Line" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eoe-LW-K4o">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -485,7 +488,7 @@
                                     <action selector="removeLastLinePressed:" target="x5f-ay-aNI" id="HSe-1E-LyS"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rgX-34-8xf">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rgX-34-8xf">
                                 <rect key="frame" x="50" y="8" width="52" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lat/Lng" id="Ap1-uN-N59">
                                     <font key="font" metaFont="system"/>
@@ -493,7 +496,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nOr-Ud-bqT">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nOr-Ud-bqT">
                                 <rect key="frame" x="9" y="26" width="133" height="32"/>
                                 <buttonCell key="cell" type="push" title="Switch Lat/Lng" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9WV-xl-hsp">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -515,7 +518,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qSu-Jo-iuV">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qSu-Jo-iuV">
                                 <rect key="frame" x="24" y="59" width="104" height="32"/>
                                 <buttonCell key="cell" type="push" title="Center US" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DbO-N9-kDS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -525,7 +528,7 @@
                                     <action selector="centerUSPressed:" target="x5f-ay-aNI" id="h85-Ib-uWx"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ox-d9-yu9">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ox-d9-yu9">
                                 <rect key="frame" x="8" y="92" width="136" height="32"/>
                                 <buttonCell key="cell" type="push" title="Center all Lines" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zqM-sh-tiK">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -533,6 +536,27 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="centerAllLinesPressed:" target="x5f-ay-aNI" id="nSh-2R-ZsG"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qR9-9Q-ru9">
+                                <rect key="frame" x="6" y="161" width="146" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="Portland, OR" drawsBackground="YES" id="uW2-Ss-NS1">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="searchForLocation:" target="x5f-ay-aNI" id="m7t-F8-kwn"/>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gKa-Uf-GRA">
+                                <rect key="frame" x="9" y="125" width="135" height="32"/>
+                                <buttonCell key="cell" type="push" title="Find Location" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dVT-sw-niD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="searchForLocation:" target="x5f-ay-aNI" id="omr-aq-fYb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -573,6 +597,7 @@
                         <outlet property="mapview" destination="IDf-sq-Yq7" id="YPq-jQ-DYM"/>
                         <outlet property="removeAllLinesButton" destination="N5u-4y-0Q9" id="EDX-b6-NPh"/>
                         <outlet property="removeLastLineButton" destination="LSh-zC-JDv" id="8Cs-UX-5mQ"/>
+                        <outlet property="searchfield" destination="qR9-9Q-ru9" id="b6R-37-UWl"/>
                         <outlet property="switchLatLngButton" destination="nOr-Ud-bqT" id="b4r-5W-2J2"/>
                         <outlet property="textfield" destination="ZzA-3K-qLW" id="4P3-HM-weB"/>
                     </connections>
