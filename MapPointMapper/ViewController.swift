@@ -131,7 +131,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
     var count: Int = 0
     for coordinate in mapPoints {
       coordinates[count] = coordinate
-      ++count
+      count += 1
     }
     
     let polyline = MKPolyline(coordinates: coordinates, count: count)

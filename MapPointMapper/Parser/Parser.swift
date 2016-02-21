@@ -114,7 +114,7 @@ class Parser {
     var tmpResults = [(NSString, NSString)]()
     var results = [[(NSString, NSString)]]()
     for arr in array {
-      for var i = 0; i < arr.count - 1; i += 2 {
+      for i in 0.stride(to: arr.count - 1, by: 2) {
         let elem = (arr[i], arr[i + 1])
         tmpResults.append(elem)
       }
