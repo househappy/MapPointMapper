@@ -76,7 +76,7 @@ class ParserSpec: XCTestCase {
     do {
       try Parser.parseString(inputString, longitudeFirst: false)
     } catch {
-      XCTAssertTrue(error is ErrorType)
+      XCTAssertNotNil(error)
     }
   }
 
