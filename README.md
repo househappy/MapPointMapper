@@ -3,6 +3,8 @@
 MapPointMapper
 ==============
 
+[![Build Status](https://travis-ci.org/househappy/MapPointMapper.svg?branch=master)](https://travis-ci.org/househappy/MapPointMapper)
+
 `MapPointMapper` is an OS X application designed to plot [WKT data](https://en.wikipedia.org/wiki/Well-known_text) and latitude and longitude coordinates for ease of visualization of geospacial data.
 
 ## Requirements
@@ -19,6 +21,7 @@ MapPointMapper
 
 ## Change Log
 
+- 2016.02.22 - Add basic location search - [theoretick][theoretick]
 - 2015.07.31 - Add error modal for invalid input strings - [theoretick][theoretick]
 - 2015.07.13 - More robust handling of varied WKT formats - [theoretick][theoretick]
 - 2015.02.17 - Added logo and gif - [dmiedema][dmiedema]
