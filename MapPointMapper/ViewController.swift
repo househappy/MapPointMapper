@@ -124,8 +124,7 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
         let placemark = placemarks.first! as CLPlacemark
 
         var region = MKCoordinateRegion()
-        region.center.latitude = placemark.region!.center.latitude
-        region.center.longitude = placemark.region!.center.longitude
+        region.center = placemark.location!.coordinate
 
         region.span = MKCoordinateSpan(latitudeDelta: 0.8, longitudeDelta: 0.8)
         self.mapview.setRegion(region, animated: true)
