@@ -112,25 +112,23 @@ class ViewController: NSViewController, MKMapViewDelegate, NSTextFieldDelegate {
 
   @IBAction func searchForLocation(sender: NSObject) {
     if searchfield.stringValue.isEmpty { return }
-    renderLocationSearch(searchfield.stringValue as NSString)
+    renderLocationSearch(searchfield.stringValue)
     searchfield.stringValue = ""
   }
 
 
-  private func renderLocationSearch(input: NSString) {
+  private func renderLocationSearch(input: String) {
     let geocoder = CLGeocoder()
-    geocoder.geocodeAddressString(input as String) {
-      if let placemarks = $0 {
-        let placemark = placemarks.first! as CLPlacemark
-
-        var region = MKCoordinateRegion()
-        region.center = placemark.location!.coordinate
-
-        region.span = MKCoordinateSpan(latitudeDelta: 0.8, longitudeDelta: 0.8)
-        self.mapview.setRegion(region, animated: true)
-      } else {
-        print($1)
+    geocoder.geocodeAddressString(input) { (placemarks, errors) in
+      guard let placemark = placemarks?.first,
+            let center = placemark.location?.coordinate else {
+        print(errors ?? "")
+        return
       }
+
+      let region = MKCoordinateRegion(center: center,
+          span: MKCoordinateSpan(latitudeDelta: 0.8, longitudeDelta: 0.8))
+      self.mapview.setRegion(region, animated: true)
     }
   }
 
